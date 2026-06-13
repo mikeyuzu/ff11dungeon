@@ -11,10 +11,14 @@ public class WeaponUI(CharacterModel character)
     private readonly CharacterModel _character = character;
 
     private static readonly string[] CharacterNames = [
-        "HumeMale", "HumeFemale",
-        "ElvaanMale", "ElvaanFemale",
-        "TarutaruMale", "TarutaruFemale",
-        "Mithra", "Galka"
+        "HumeMale",
+        "HumeFemale",
+        "ElvaanMale",
+        "ElvaanFemale",
+        "TarutaruMale",
+        "TarutaruFemale",
+        "Mithra",
+        "Galka"
     ];
     private int _characterIndex = 1;
 
@@ -49,6 +53,9 @@ public class WeaponUI(CharacterModel character)
     private static readonly string[] RenderModeNames = ["Textured", "Wireframe", "Normal", "Depth", "Bone"];
     private int _renderModeIndex;
 
+    /// <summary>
+    /// ボーンリストの初期化 - キャラクターモデルからボーン名を抽出してコンボボックス用の配列を作成
+    /// </summary>
     public void InitBoneList()
     {
         var bones = _character.GetAllBones();
@@ -68,10 +75,19 @@ public class WeaponUI(CharacterModel character)
 
         _rightBoneIndex = Array.FindIndex(_boneNames, b => b.Equals("bone0090", StringComparison.OrdinalIgnoreCase));
         _leftBoneIndex = Array.FindIndex(_boneNames, b => b.Equals("bone0075", StringComparison.OrdinalIgnoreCase));
-        if (_rightBoneIndex < 0) _rightBoneIndex = 0;
-        if (_leftBoneIndex < 0) _leftBoneIndex = 0;
+        if (_rightBoneIndex < 0)
+        {
+            _rightBoneIndex = 0;
+        }
+        if (_leftBoneIndex < 0)
+        {
+            _leftBoneIndex = 0;
+        }
     }
 
+    /// <summary>
+    /// UIの描画 - ImGuiを使ってキャラクター選択、モーション選択、レンダリングモード、武器装備のセクションを作成
+    /// </summary>
     public void Draw()
     {
         ImGui.SetNextWindowPos(new Vector2(10, 10), ImGuiCond.FirstUseEver);
@@ -90,6 +106,9 @@ public class WeaponUI(CharacterModel character)
         ImGui.End();
     }
 
+    /// <summary>
+    /// キャラクター選択セクション - コンボボックスでキャラクターモデルを選択、選択が変わったらモデルをロードしてモーションリストを更新
+    /// </summary>
     private void DrawCharacterSection()
     {
         if (ImGui.CollapsingHeader("Character", ImGuiTreeNodeFlags.DefaultOpen))
@@ -102,6 +121,9 @@ public class WeaponUI(CharacterModel character)
         }
     }
 
+    /// <summary>
+    /// モーション選択セクション - コンボボックスでモーションを選択、スライダーで速度調整、再生/一時停止/フレーム送りのボタン、フレーム位置のスライダーと表示
+    /// </summary>
     private void DrawMotionSection()
     {
         if (ImGui.CollapsingHeader("Motion", ImGuiTreeNodeFlags.DefaultOpen))
@@ -109,7 +131,9 @@ public class WeaponUI(CharacterModel character)
             if (ImGui.Combo("Animation", ref _motionIndex, _currentMotionNames, _currentMotionNames.Length))
             {
                 if (_motionIndex >= 0 && _motionIndex < _currentMotionNames.Length)
+                {
                     _character.PlayMotion(_currentMotionNames[_motionIndex]);
+                }
             }
 
             float speed = _character.MotionSpeed;
@@ -149,6 +173,9 @@ public class WeaponUI(CharacterModel character)
         }
     }
 
+    /// <summary>
+    /// レンダリングモードセクション - コンボボックスでレンダリングモードを選択、選択が変わったらモデルの描画モードを更新
+    /// </summary>
     private void DrawRenderSection()
     {
         if (ImGui.CollapsingHeader("Render", ImGuiTreeNodeFlags.DefaultOpen))
@@ -160,6 +187,9 @@ public class WeaponUI(CharacterModel character)
         }
     }
 
+    /// <summary>
+    /// 武器装備セクション - コンボボックスでメイン武器を選択、チェックボックスで二刀流の切り替え、コンボボックスで右手と左手の装備ボーンを選択（オプション）
+    /// </summary>
     private void DrawWeaponSection()
     {
         if (ImGui.CollapsingHeader("Weapon", ImGuiTreeNodeFlags.DefaultOpen))
@@ -216,6 +246,10 @@ public class WeaponUI(CharacterModel character)
         }
     }
 
+    /// <summary>
+    /// モーションリストの更新 - 武器のカテゴリに応じたモーションを追加、武器なしの場合は基本モーションのみ、武器装備時は対応するモーションを追加してリストを更新
+    /// </summary>
+    /// <param name="weapon"></param>
     private void UpdateMotionList(WeaponInfo? weapon)
     {
         _motionIndex = 0;
@@ -243,9 +277,16 @@ public class WeaponUI(CharacterModel character)
         _currentMotionNames = [.. motions];
     }
 
+    /// <summary>
+    /// デフォルトの装備ボーンの選択 - 武器のカテゴリに応じたデフォルトの右手と左手の装備ボーンを選択、武器なしの場合は一般的な骨を選択、武器装備時はカテゴリに対応する骨を選択
+    /// </summary>
+    /// <param name="weapon"></param>
     private void UpdateDefaultBoneSelection(WeaponInfo? weapon)
     {
-        if (!_boneListReady || _boneNames.Length == 0) return;
+        if (!_boneListReady || _boneNames.Length == 0)
+        {
+            return;
+        }
 
         if (weapon == null)
         {
@@ -267,6 +308,11 @@ public class WeaponUI(CharacterModel character)
         }
     }
 
+    /// <summary>
+    /// ボーン名からインデックスを検索 - ボーン名が一致するインデックスを返す、見つからない場合は0を返す
+    /// </summary>
+    /// <param name="boneName"></param>
+    /// <returns></returns>
     private int FindBoneIndex(string boneName)
     {
         var idx = Array.FindIndex(_boneNames, b => b.Equals(boneName, StringComparison.OrdinalIgnoreCase));

@@ -31,6 +31,9 @@ public class Application
     private double _lastFrameTime;
     private bool _assetsLoaded;
 
+    /// <summary>
+    /// アプリケーションの開始 - ウィンドウの作成とイベントループの開始
+    /// </summary>
     public void Run()
     {
         var options = WindowOptions.Default;
@@ -49,6 +52,9 @@ public class Application
         _window.Run();
     }
 
+    /// <summary>
+    /// ウィンドウとOpenGLの初期化、アセットの非同期読み込み開始、ImGuiのセットアップ
+    /// </summary>
     private void OnLoad()
     {
         _gl = _window.CreateOpenGL();
@@ -89,6 +95,11 @@ public class Application
         _ = LoadAssetsAsync();
     }
 
+    /// <summary>
+    /// 日本語フォントの読み込みとImGuiへの反映を試みる
+    /// </summary>
+    /// <param name="fontPath"></param>
+    /// <param name="fontSize"></param>
     private void TryLoadJapaneseFont(string fontPath, float fontSize)
     {
         try
@@ -160,6 +171,10 @@ public class Application
         }
     }
 
+    /// <summary>
+    /// キャラクターモデルと関連アセットの非同期読み込み。完了後にカメラの調整やUIの初期化を行う
+    /// </summary>
+    /// <returns></returns>
     private async Task LoadAssetsAsync()
     {
         try
@@ -184,6 +199,10 @@ public class Application
         }
     }
 
+    /// <summary>
+    /// キーボード入力の処理 - Tabキーで表示モードを切り替える
+    /// </summary>
+    /// <param name="key"></param>
     private void OnKeyPress(Key key)
     {
         // ImGuiがキーボードをキャプチャ中は無視
@@ -198,6 +217,10 @@ public class Application
         }
     }
 
+    /// <summary>
+    /// フレームごとの更新処理 - 入力の更新、キャラクターとカメラの状態更新を行う
+    /// </summary>
+    /// <param name="deltaTime"></param>
     private void OnUpdate(double deltaTime)
     {
         // ImGuiがマウスをキャプチャ中はカメラ操作を無効化
@@ -216,6 +239,10 @@ public class Application
         _lastFrameTime = deltaTime;
     }
 
+    /// <summary>
+    /// フレームごとの描画処理 - 3Dシーンの描画とImGuiの描画を行う
+    /// </summary>
+    /// <param name="deltaTime"></param>
     private void OnRender(double deltaTime)
     {
         _renderer.BeginFrame(_camera);
@@ -241,12 +268,19 @@ public class Application
         _imguiController.Render();
     }
 
+    /// <summary>
+    /// ウィンドウサイズ変更時の処理 - OpenGLのビューポートとカメラのアスペクト比を更新する
+    /// </summary>
+    /// <param name="size"></param>
     private void OnResize(Vector2D<int> size)
     {
         _gl.Viewport(size);
         _camera.Resize(size.X, size.Y);
     }
 
+    /// <summary>
+    /// アプリケーション終了時の処理 - 各種リソースの解放とシャットダウンログの出力
+    /// </summary>
     private void OnClosing()
     {
         _imguiController.Dispose();

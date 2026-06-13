@@ -22,6 +22,10 @@ public class Renderer : IDisposable
 
     public GL GL => _gl;
 
+    /// <summary>
+    /// レンダラーの初期化 - OpenGLの基本設定とシェーダー、グリッドのセットアップ
+    /// </summary>
+    /// <param name="gl"></param>
     public Renderer(GL gl)
     {
         _gl = gl;
@@ -35,6 +39,10 @@ public class Renderer : IDisposable
         InitGrid();
     }
 
+    /// <summary>
+    /// フレームの開始 - 画面のクリアとカメラのビュー・プロジェクション行列のシェーダーへの設定
+    /// </summary>
+    /// <param name="camera"></param>
     public void BeginFrame(Camera camera)
     {
         _gl.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
@@ -44,6 +52,9 @@ public class Renderer : IDisposable
         SetUniformMatrix4(_basicProgram, "uProjection", camera.ProjectionMatrix);
     }
 
+    /// <summary>
+    /// グリッドの描画 - シェーダーを切り替えて、半透明のグリッド線を描画
+    /// </summary>
     public void DrawGrid()
     {
         _gl.UseProgram(_basicProgram);
@@ -60,6 +71,16 @@ public class Renderer : IDisposable
         _gl.Disable(EnableCap.Blend);
     }
 
+    /// <summary>
+    /// メッシュの描画 - テクスチャの有無に応じてシェーダーを切り替え、ライティングとテクスチャを適用して描画
+    /// </summary>
+    /// <param name="vao"></param>
+    /// <param name="indexCount"></param>
+    /// <param name="textureId"></param>
+    /// <param name="model"></param>
+    /// <param name="camera"></param>
+    /// <param name="opacity"></param>
+    /// <param name="wireframe"></param>
     public void DrawMesh(uint vao, int indexCount, uint textureId, Matrix4x4 model, Camera camera,
         float opacity = 1.0f, bool wireframe = false)
     {
@@ -104,12 +125,29 @@ public class Renderer : IDisposable
         }
     }
 
+    /// <summary>
+    /// スキンメッシュの描画 - 現状は通常のメッシュ描画と同じだが、将来的にスキニング用のシェーダーに切り替える可能性がある
+    /// </summary>
+    /// <param name="vao"></param>
+    /// <param name="indexCount"></param>
+    /// <param name="textureId"></param>
+    /// <param name="model"></param>
+    /// <param name="camera"></param>
+    /// <param name="opacity"></param>
+    /// <param name="wireframe"></param>
     public void DrawSkinnedMesh(uint vao, int indexCount, uint textureId, Matrix4x4 model,
         Camera camera, float opacity = 1.0f, bool wireframe = false)
     {
         DrawMesh(vao, indexCount, textureId, model, camera, opacity, wireframe);
     }
 
+    /// <summary>
+    /// ボーンの描画 - 単色シェーダーを使用して、指定された位置と半径の球を描画。深度テストを一時的に無効化して常に前面に表示する
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="radius"></param>
+    /// <param name="color"></param>
+    /// <param name="camera"></param>
     public void DrawBoneSphere(Vector3 position, float radius, Vector4 color, Camera camera)
     {
         _gl.UseProgram(_boneProgram);
@@ -125,6 +163,13 @@ public class Renderer : IDisposable
         _gl.Enable(EnableCap.DepthTest);
     }
 
+    /// <summary>
+    /// ボーンの接続線の描画 - 単色シェーダーを使用して、指定された始点と終点を結ぶ線を描画。深度テストを一時的に無効化して常に前面に表示する
+    /// </summary>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    /// <param name="color"></param>
+    /// <param name="camera"></param>
     public void DrawBoneLine(Vector3 from, Vector3 to, Vector4 color, Camera camera)
     {
         _gl.UseProgram(_basicProgram);
@@ -137,16 +182,27 @@ public class Renderer : IDisposable
         DrawLineImmediate(lineVerts);
     }
 
+    /// <summary>
+    /// ビューとプロジェクション行列の設定 - 指定されたシェーダープログラムに対して、カメラのビュー行列とプロジェクション行列をユニフォームとして設定する
+    /// </summary>
+    /// <param name="program"></param>
+    /// <param name="camera"></param>
     public void SetViewProjection(uint program, Camera camera)
     {
         SetUniformMatrix4(program, "uView", camera.ViewMatrix);
         SetUniformMatrix4(program, "uProjection", camera.ProjectionMatrix);
     }
 
+    /// <summary>
+    /// フレームの終了 - 現状は特に処理はないが、将来的に後処理やバッファのスワップなどをここで行う可能性がある
+    /// </summary>
     public static void EndFrame()
     {
     }
 
+    /// <summary>
+    /// 基本的なシェーダープログラムの初期化 - 単色描画用の頂点シェーダーとフラグメントシェーダーを定義し、コンパイルしてプログラムを作成する
+    /// </summary>
     private void InitBasicShader()
     {
         var vert = @"
@@ -170,6 +226,9 @@ void main() {
         _basicProgram = CreateShaderProgram(vert, frag);
     }
 
+    /// <summary>
+    /// テクスチャ描画用のシェーダープログラムの初期化 - ライティングとテクスチャを組み合わせた頂点シェーダーとフラグメントシェーダーを定義し、コンパイルしてプログラムを作成する
+    /// </summary>
     private void InitTexturedShader()
     {
         var vert = @"
@@ -240,6 +299,9 @@ void main() {
         _texturedProgram = CreateShaderProgram(vert, frag);
     }
 
+    /// <summary>
+    /// ボーン表示用のシェーダープログラムの初期化 - 単色描画用のシェーダーをベースに、ボーン表示に特化した頂点シェーダーとフラグメントシェーダーを定義し、コンパイルしてプログラムを作成する
+    /// </summary>
     private void InitBoneShader()
     {
         var vert = @"
@@ -263,6 +325,9 @@ void main() {
         _boneProgram = CreateShaderProgram(vert, frag);
     }
 
+    /// <summary>
+    /// グリッドの初期化 - XZ平面にグリッド線を生成し、頂点データをVBOにアップロードしてVAOをセットアップする。グリッドは-5から+5の範囲で、20分割される
+    /// </summary>
     private void InitGrid()
     {
         var vertices = new List<float>();
@@ -307,6 +372,9 @@ void main() {
     private int _sphereIndexCount;
     private bool _sphereInitialized;
 
+    /// <summary>
+    /// 球の初期化 - UV球の頂点とインデックスを生成し、VBOとEBOにアップロードしてVAOをセットアップする。スタック数とスライス数は固定で、球の品質を決定する
+    /// </summary>
     private void InitSphere()
     {
         if (_sphereInitialized) return;
@@ -371,6 +439,9 @@ void main() {
         _sphereInitialized = true;
     }
 
+    /// <summary>
+    /// 球の描画 - 球のVAOをバインドして、インデックスを使用して三角形として描画する。描画後にVAOをアンバインドする
+    /// </summary>
     private void DrawSphere()
     {
         InitSphere();
@@ -386,6 +457,10 @@ void main() {
     private uint _lineVbo;
     private bool _lineInitialized;
 
+    /// <summary>
+    /// 線の即時描画 - 指定された頂点配列を使用して、線分を描画する。最初の呼び出しでVAOとVBOを生成し、以降は頂点データを更新して描画する。描画後にVAOをアンバインドする
+    /// </summary>
+    /// <param name="vertices"></param>
     private void DrawLineImmediate(float[] vertices)
     {
         if (!_lineInitialized)
@@ -410,6 +485,13 @@ void main() {
         _gl.BindVertexArray(0);
     }
 
+    /// <summary>
+    /// シェーダープログラムの作成 - 頂点シェーダーとフラグメントシェーダーのソースコードを受け取り、それぞれをコンパイルしてからプログラムにリンクする。コンパイルやリンクに失敗した場合は例外をスローする
+    /// </summary>
+    /// <param name="vertexSource"></param>
+    /// <param name="fragmentSource"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     private uint CreateShaderProgram(string vertexSource, string fragmentSource)
     {
         var vertexShader = CompileShader(ShaderType.VertexShader, vertexSource);
@@ -433,6 +515,13 @@ void main() {
         return program;
     }
 
+    /// <summary>
+    /// シェーダーのコンパイル - 指定されたシェーダータイプとソースコードを使用してシェーダーをコンパイルする。コンパイルに失敗した場合は例外をスローする
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="source"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     private uint CompileShader(ShaderType type, string source)
     {
         var shader = _gl.CreateShader(type);
@@ -449,6 +538,12 @@ void main() {
         return shader;
     }
 
+    /// <summary>
+    /// ユニフォーム行列の設定 - 指定されたシェーダープログラムとユニフォーム名に対して、4x4行列をユニフォームとして設定する。ユニフォームが存在しない場合は何もしない
+    /// </summary>
+    /// <param name="program"></param>
+    /// <param name="name"></param>
+    /// <param name="matrix"></param>
     public unsafe void SetUniformMatrix4(uint program, string name, Matrix4x4 matrix)
     {
         var location = _gl.GetUniformLocation(program, name);
@@ -458,6 +553,12 @@ void main() {
         }
     }
 
+    /// <summary>
+    /// ユニフォームベクトルの設定 - 指定されたシェーダープログラムとユニフォーム名に対して、4成分のベクトルをユニフォームとして設定する。ユニフォームが存在しない場合は何もしない
+    /// </summary>
+    /// <param name="program"></param>
+    /// <param name="name"></param>
+    /// <param name="value"></param>
     private void SetUniformVec4(uint program, string name, Vector4 value)
     {
         var location = _gl.GetUniformLocation(program, name);
@@ -465,6 +566,12 @@ void main() {
             _gl.Uniform4(location, value.X, value.Y, value.Z, value.W);
     }
 
+    /// <summary>
+    /// ユニフォームベクトルの設定 - 指定されたシェーダープログラムとユニフォーム名に対して、3成分のベクトルをユニフォームとして設定する。ユニフォームが存在しない場合は何もしない
+    /// </summary>
+    /// <param name="program"></param>
+    /// <param name="name"></param>
+    /// <param name="value"></param>
     private void SetUniformVec3(uint program, string name, Vector3 value)
     {
         var location = _gl.GetUniformLocation(program, name);
@@ -472,6 +579,12 @@ void main() {
             _gl.Uniform3(location, value.X, value.Y, value.Z);
     }
 
+    /// <summary>
+    /// ユニフォームフロートの設定 - 指定されたシェーダープログラムとユニフォーム名に対して、単一のフロート値をユニフォームとして設定する。ユニフォームが存在しない場合は何もしない
+    /// </summary>
+    /// <param name="program"></param>
+    /// <param name="name"></param>
+    /// <param name="value"></param>
     private void SetUniformFloat(uint program, string name, float value)
     {
         var location = _gl.GetUniformLocation(program, name);
@@ -479,6 +592,12 @@ void main() {
             _gl.Uniform1(location, value);
     }
 
+    /// <summary>
+    /// ユニフォーム整数の設定 - 指定されたシェーダープログラムとユニフォーム名に対して、単一の整数値をユニフォームとして設定する。ユニフォームが存在しない場合は何もしない
+    /// </summary>
+    /// <param name="program"></param>
+    /// <param name="name"></param>
+    /// <param name="value"></param>
     private void SetUniformInt(uint program, string name, int value)
     {
         var location = _gl.GetUniformLocation(program, name);
@@ -486,6 +605,9 @@ void main() {
             _gl.Uniform1(location, value);
     }
 
+    /// <summary>
+    /// リソースの解放 - シェーダープログラム、VAO、VBOなどのOpenGLリソースを削除してクリーンアップする。GC.SuppressFinalizeを呼び出して、ファイナライザが呼び出されないようにする
+    /// </summary>
     public void Dispose()
     {
         _gl.DeleteProgram(_basicProgram);

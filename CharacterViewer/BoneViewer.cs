@@ -46,7 +46,10 @@ public class BoneViewer(AssetManager assetManager, Renderer renderer)
     private void RebuildBoneList()
     {
         _bones.Clear();
-        if (_character == null) return;
+        if (_character == null)
+        {
+            return;
+        }
 
         var allBones = _character.GetAllBones();
         var boneByName = _character.GetBoneByName();
@@ -82,7 +85,10 @@ public class BoneViewer(AssetManager assetManager, Renderer renderer)
     /// </summary>
     public void SelectBone(int index)
     {
-        if (index < 0 || index >= _bones.Count) return;
+        if (index < 0 || index >= _bones.Count)
+        {
+            return;
+        }
 
         _selectedBoneIndex = index;
         var bone = _bones[index];
@@ -136,16 +142,20 @@ public class BoneViewer(AssetManager assetManager, Renderer renderer)
     {
         _currentPart = partKey;
         Console.WriteLine($"[BoneViewer] Part: {partKey}");
-        // TODO: パーツ別の表示フィルタリング
     }
 
+    /// <summary>
+    /// Idleモーションの再生を切り替え
+    /// </summary>
     public void ToggleIdleMotion()
     {
         _playIdle = !_playIdle;
     }
 
-    // ===== 更新 =====
-
+    /// <summary>
+    /// 毎フレームの更新 - アニメーション再生とボーン位置の更新
+    /// </summary>
+    /// <param name="deltaTime"></param>
     public void Update(float deltaTime)
     {
         if (_character == null) return;
@@ -160,9 +170,15 @@ public class BoneViewer(AssetManager assetManager, Renderer renderer)
         UpdateBonePositions();
     }
 
+    /// <summary>
+    /// ボーンのワールド位置を更新
+    /// </summary>
     private void UpdateBonePositions()
     {
-        if (_character == null) return;
+        if (_character == null)
+        {
+            return;
+        }
         var boneByName = _character.GetBoneByName();
 
         for (int i = 0; i < _bones.Count; i++)
@@ -178,14 +194,17 @@ public class BoneViewer(AssetManager assetManager, Renderer renderer)
         }
     }
 
-    // ===== 描画 =====
-
+    /// <summary>
+    /// ボーンを描画
+    /// </summary>
+    /// <param name="renderer"></param>
+    /// <param name="camera"></param>
     public void Render(Renderer renderer, Camera camera)
     {
-        if (_character == null) return;
-
-        // メッシュを半透明で描画
-        // (CharacterModelのRenderをopacity低で呼ぶことで対応)
+        if (_character == null)
+        {
+            return;
+        }
 
         // ボーンの描画
         for (int i = 0; i < _bones.Count; i++)
@@ -234,8 +253,10 @@ public class BoneViewer(AssetManager assetManager, Renderer renderer)
         }
     }
 
-    // ===== 情報取得 =====
-
+    /// <summary>
+    /// 選択されたボーンの名前を取得
+    /// </summary>
+    /// <returns></returns>
     public string? GetSelectedBoneName()
     {
         if (_selectedBoneIndex < 0 || _selectedBoneIndex >= _bones.Count)
@@ -243,6 +264,10 @@ public class BoneViewer(AssetManager assetManager, Renderer renderer)
         return _bones[_selectedBoneIndex].Node.Name;
     }
 
+    /// <summary>
+    /// 選択されたボーンの位置と親情報を取得
+    /// </summary>
+    /// <returns></returns>
     public string? GetSelectedBoneInfo()
     {
         if (_selectedBoneIndex < 0 || _selectedBoneIndex >= _bones.Count)
@@ -255,7 +280,11 @@ public class BoneViewer(AssetManager assetManager, Renderer renderer)
 
     public IReadOnlyList<BoneEntry> GetBones() => _bones;
 
-    // ===== ヘルパー =====
+    /// <summary>
+    /// 行列から位置を抽出
+    /// </summary>
+    /// <param name="matrix"></param>
+    /// <returns></returns>
 
     private static Vector3 ExtractPosition(Matrix4x4 matrix)
     {

@@ -26,6 +26,11 @@ public class Camera
         set => _autoRotate = value;
     }
 
+    /// <summary>
+    /// カメラの初期化 - アスペクト比を設定して投影行列を更新、初期位置を計算
+    /// </summary>
+    /// <param name="width"></param>
+    /// <param name="height"></param>
     public Camera(int width, int height)
     {
         _aspectRatio = (float)width / height;
@@ -33,13 +38,26 @@ public class Camera
         UpdatePosition();
     }
 
+    /// <summary>
+    /// ウィンドウサイズの変更に伴うアスペクト比の更新と投影行列の再計算
+    /// </summary>
+    /// <param name="width"></param>
+    /// <param name="height"></param>
     public void Resize(int width, int height)
     {
-        if (height == 0) height = 1;
+        if (height == 0)
+        {
+            height = 1;
+        }
         _aspectRatio = (float)width / height;
         UpdateProjection();
     }
 
+    /// <summary>
+    /// マウスドラッグによるカメラの回転 - 水平方向のドラッグでヨー、垂直方向のドラッグでピッチを調整
+    /// </summary>
+    /// <param name="deltaX"></param>
+    /// <param name="deltaY"></param>
     public void Orbit(float deltaX, float deltaY)
     {
         _yaw -= deltaX * 0.005f;
@@ -48,6 +66,11 @@ public class Camera
         UpdatePosition();
     }
 
+    /// <summary>
+    /// マウスの右ドラッグによるカメラのパン - カメラの右方向と上方向を使ってターゲット位置を移動
+    /// </summary>
+    /// <param name="deltaX"></param>
+    /// <param name="deltaY"></param>
     public void Pan(float deltaX, float deltaY)
     {
         // カメラの右方向と上方向を使ってパン
@@ -60,6 +83,10 @@ public class Camera
         UpdatePosition();
     }
 
+    /// <summary>
+    /// マウスホイールによるズーム - カメラとターゲットの距離を調整してズームイン/アウト
+    /// </summary>
+    /// <param name="delta"></param>
     public void OnScroll(float delta)
     {
         _distance -= delta * 0.3f;
@@ -67,6 +94,10 @@ public class Camera
         UpdatePosition();
     }
 
+    /// <summary>
+    /// 自動回転の更新 - 有効な場合、時間経過に応じてヨー角を増加させてカメラを回転させる
+    /// </summary>
+    /// <param name="deltaTime"></param>
     public void Update(float deltaTime)
     {
         if (_autoRotate)
@@ -121,6 +152,9 @@ public class Camera
         return new Ray(origin, direction);
     }
 
+    /// <summary>
+    /// カメラの位置を更新 - ターゲットからの距離とヨー/ピッチ角度に基づいてカメラの位置を計算
+    /// </summary>
     private void UpdatePosition()
     {
         var x = _distance * MathF.Cos(_pitch) * MathF.Sin(_yaw);
@@ -129,6 +163,9 @@ public class Camera
         Position = Target + new Vector3(x, y, z);
     }
 
+    /// <summary>
+    /// 投影行列を更新 - FOV、アスペクト比、近距離/遠距離クリップ平面に基づいて透視投影行列を計算
+    /// </summary>
     private void UpdateProjection()
     {
         ProjectionMatrix = Matrix4x4.CreatePerspectiveFieldOfView(

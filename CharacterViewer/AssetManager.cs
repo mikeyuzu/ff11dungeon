@@ -18,6 +18,10 @@ public class AssetManager : IDisposable
 
     public string AssetBasePath { get; set; }
 
+    /// <summary>
+    /// コンストラクタ - OpenGLコンテキストとAssimpの初期化、アセットディレクトリの検出
+    /// </summary>
+    /// <param name="gl"></param>
     public AssetManager(GL gl)
     {
         _gl = gl;
@@ -35,10 +39,17 @@ public class AssetManager : IDisposable
         Console.WriteLine($"[AssetManager] Exists: {Directory.Exists(AssetBasePath)}");
     }
 
+    /// <summary>
+    /// FBXファイルの読み込み - AssimpでパースしてLoadedModelに変換、GPUメッシュの作成、キャッシュ保存
+    /// </summary>
+    /// <param name="relativePath"></param>
+    /// <returns></returns>
     public unsafe LoadedModel? LoadFbx(string relativePath)
     {
         if (_modelCache.TryGetValue(relativePath, out var cached))
+        {
             return cached;
+        }
 
         var fullPath = Path.Combine(AssetBasePath, relativePath.Replace('/', Path.DirectorySeparatorChar));
         if (!System.IO.File.Exists(fullPath))
@@ -106,7 +117,9 @@ public class AssetManager : IDisposable
             var transform = meshTransforms.TryGetValue((int)i, out var t) ? t : Matrix4x4.Identity;
             var meshData = ProcessMesh(mesh, transform);
             if (meshData != null)
+            {
                 model.Meshes.Add(meshData);
+            }
         }
 
         ProcessNodeHierarchy(scene->MRootNode, model, null);
@@ -116,7 +129,9 @@ public class AssetManager : IDisposable
             var anim = scene->MAnimations[i];
             var clip = ProcessAnimation(anim);
             if (clip != null)
+            {
                 model.Animations.Add(clip);
+            }
         }
 
         foreach (var mesh in model.Meshes)
@@ -131,10 +146,17 @@ public class AssetManager : IDisposable
         return model;
     }
 
+    /// <summary>
+    /// TGAファイルの読み込み - PfimでパースしてOpenGLテクスチャを作成、キャッシュ保存
+    /// </summary>
+    /// <param name="relativePath"></param>
+    /// <returns></returns>
     public uint LoadTexture(string relativePath)
     {
         if (_textureCache.TryGetValue(relativePath, out var cached))
+        {
             return cached;
+        }
 
         var fullPath = Path.Combine(AssetBasePath, relativePath.Replace('/', Path.DirectorySeparatorChar));
         if (!System.IO.File.Exists(fullPath))
@@ -195,6 +217,12 @@ public class AssetManager : IDisposable
         }
     }
 
+    /// <summary>
+    /// AssimpのMesh構造体からMeshDataへの変換 - 頂点データの展開、骨情報の整理、GPUメッシュの準備
+    /// </summary>
+    /// <param name="mesh"></param>
+    /// <param name="nodeTransform"></param>
+    /// <returns></returns>
     private unsafe MeshData? ProcessMesh(Silk.NET.Assimp.Mesh* mesh, Matrix4x4 nodeTransform)
     {
         var vertices = new List<float>();
@@ -211,15 +239,29 @@ public class AssetManager : IDisposable
         {
             var pos = mesh->MVertices[i];
             positions[i] = new Vector3(pos.X, pos.Y, pos.Z);
-            if (mesh->MNormals != null) { var n = mesh->MNormals[i]; normals[i] = new Vector3(n.X, n.Y, n.Z); }
-            else { normals[i] = Vector3.UnitY; }
-            if (mesh->MTextureCoords[0] != null) { var tc = mesh->MTextureCoords[0][i]; texCoords[i] = new Vector2(tc.X, tc.Y); }
+            if (mesh->MNormals != null)
+            {
+                var n = mesh->MNormals[i];
+                normals[i] = new Vector3(n.X, n.Y, n.Z);
+            }
+            else
+            {
+                normals[i] = Vector3.UnitY;
+            }
+            if (mesh->MTextureCoords[0] != null)
+            {
+                var tc = mesh->MTextureCoords[0][i];
+                texCoords[i] = new Vector2(tc.X, tc.Y);
+            }
         }
 
         for (uint i = 0; i < mesh->MNumFaces; i++)
         {
             var face = mesh->MFaces[i];
-            for (uint j = 0; j < face.MNumIndices; j++) indices.Add(face.MIndices[j]);
+            for (uint j = 0; j < face.MNumIndices; j++)
+            {
+                indices.Add(face.MIndices[j]);
+            }
         }
 
         for (uint i = 0; i < mesh->MNumBones; i++)
@@ -230,16 +272,24 @@ public class AssetManager : IDisposable
             for (uint j = 0; j < bone->MNumWeights; j++)
             {
                 var weight = bone->MWeights[j];
-                if (!boneWeights.ContainsKey(weight.MVertexId)) boneWeights[weight.MVertexId] = [];
+                if (!boneWeights.ContainsKey(weight.MVertexId))
+                {
+                    boneWeights[weight.MVertexId] = [];
+                }
                 boneWeights[weight.MVertexId].Add(((int)i, weight.MWeight));
             }
         }
 
         for (uint i = 0; i < mesh->MNumVertices; i++)
         {
-            vertices.Add(positions[i].X); vertices.Add(positions[i].Y); vertices.Add(positions[i].Z);
-            vertices.Add(normals[i].X); vertices.Add(normals[i].Y); vertices.Add(normals[i].Z);
-            vertices.Add(texCoords[i].X); vertices.Add(texCoords[i].Y);
+            vertices.Add(positions[i].X);
+            vertices.Add(positions[i].Y);
+            vertices.Add(positions[i].Z);
+            vertices.Add(normals[i].X);
+            vertices.Add(normals[i].Y);
+            vertices.Add(normals[i].Z);
+            vertices.Add(texCoords[i].X);
+            vertices.Add(texCoords[i].Y);
         }
 
         var meshData = new MeshData
@@ -263,10 +313,26 @@ public class AssetManager : IDisposable
             if (boneWeights.TryGetValue(vi, out var weights))
             {
                 var sorted = weights.OrderByDescending(w => w.weight).Take(4).ToList();
-                if (sorted.Count > 0) { vbw[vi].Bone0 = sorted[0].boneIndex; vbw[vi].Weight0 = sorted[0].weight; }
-                if (sorted.Count > 1) { vbw[vi].Bone1 = sorted[1].boneIndex; vbw[vi].Weight1 = sorted[1].weight; }
-                if (sorted.Count > 2) { vbw[vi].Bone2 = sorted[2].boneIndex; vbw[vi].Weight2 = sorted[2].weight; }
-                if (sorted.Count > 3) { vbw[vi].Bone3 = sorted[3].boneIndex; vbw[vi].Weight3 = sorted[3].weight; }
+                if (sorted.Count > 0)
+                {
+                    vbw[vi].Bone0 = sorted[0].boneIndex;
+                    vbw[vi].Weight0 = sorted[0].weight;
+                }
+                if (sorted.Count > 1)
+                {
+                    vbw[vi].Bone1 = sorted[1].boneIndex;
+                    vbw[vi].Weight1 = sorted[1].weight;
+                }
+                if (sorted.Count > 2)
+                {
+                    vbw[vi].Bone2 = sorted[2].boneIndex;
+                    vbw[vi].Weight2 = sorted[2].weight;
+                }
+                if (sorted.Count > 3)
+                {
+                    vbw[vi].Bone3 = sorted[3].boneIndex;
+                    vbw[vi].Weight3 = sorted[3].weight;
+                }
             }
         }
         meshData.BoneWeights = vbw;
@@ -274,6 +340,12 @@ public class AssetManager : IDisposable
         return meshData;
     }
 
+    /// <summary>
+    /// AssimpのNode構造体からBoneNodeへの変換 - 階層構造を再帰的に処理してBoneNodeツリーを構築
+    /// </summary>
+    /// <param name="node"></param>
+    /// <param name="model"></param>
+    /// <param name="parentName"></param>
     private unsafe void ProcessNodeHierarchy(Node* node, LoadedModel model, string? parentName)
     {
         var name = node->MName.AsString;
@@ -286,9 +358,17 @@ public class AssetManager : IDisposable
         model.Bones.Add(boneNode);
 
         for (uint i = 0; i < node->MNumChildren; i++)
+        {
             ProcessNodeHierarchy(node->MChildren[i], model, name);
+        }
     }
 
+    /// <summary>
+    /// AssimpのNode構造体を再帰的に処理して、各Meshが属するNodeのワールド変換行列を計算してmeshTransformsに保存
+    /// </summary>
+    /// <param name="node"></param>
+    /// <param name="parentTransform"></param>
+    /// <param name="meshTransforms"></param>
     private unsafe void CollectMeshTransforms(Node* node, Matrix4x4 parentTransform, Dictionary<int, Matrix4x4> meshTransforms)
     {
         var localTransform = Matrix4x4.Transpose(node->MTransformation);
@@ -301,9 +381,16 @@ public class AssetManager : IDisposable
         }
 
         for (uint i = 0; i < node->MNumChildren; i++)
+        {
             CollectMeshTransforms(node->MChildren[i], worldTransform, meshTransforms);
+        }
     }
 
+    /// <summary>
+    /// AssimpのAnimation構造体からAnimationClipへの変換 - 各チャネルのキーフレームを展開してAnimationTrackにまとめる
+    /// </summary>
+    /// <param name="anim"></param>
+    /// <returns></returns>
     private unsafe AnimationClip? ProcessAnimation(Animation* anim)
     {
         var clip = new AnimationClip
@@ -316,7 +403,10 @@ public class AssetManager : IDisposable
         for (uint i = 0; i < anim->MNumChannels; i++)
         {
             var channel = anim->MChannels[i];
-            var track = new AnimationTrack { BoneName = channel->MNodeName.AsString };
+            var track = new AnimationTrack
+            {
+                BoneName = channel->MNodeName.AsString
+            };
 
             for (uint k = 0; k < channel->MNumPositionKeys; k++)
             {
@@ -338,6 +428,10 @@ public class AssetManager : IDisposable
         return clip;
     }
 
+    /// <summary>
+    /// MeshDataの頂点とインデックスをGPUバッファにアップロードして、VAO/VBO/EBOを作成してMeshDataに保存
+    /// </summary>
+    /// <param name="mesh"></param>
     private void CreateGpuMesh(MeshData mesh)
     {
         mesh.Vao = _gl.GenVertexArray();
@@ -350,15 +444,19 @@ public class AssetManager : IDisposable
         unsafe
         {
             fixed (float* ptr = mesh.Vertices)
+            {
                 _gl.BufferData(BufferTargetARB.ArrayBuffer, (nuint)(mesh.Vertices.Length * sizeof(float)), ptr,
                     mesh.HasBones ? BufferUsageARB.DynamicDraw : BufferUsageARB.StaticDraw);
+            }
         }
 
         _gl.BindBuffer(BufferTargetARB.ElementArrayBuffer, mesh.Ebo);
         unsafe
         {
             fixed (uint* ptr = mesh.Indices)
+            {
                 _gl.BufferData(BufferTargetARB.ElementArrayBuffer, (nuint)(mesh.Indices.Length * sizeof(uint)), ptr, BufferUsageARB.StaticDraw);
+            }
         }
 
         const uint stride = 8 * sizeof(float);
@@ -372,16 +470,31 @@ public class AssetManager : IDisposable
         _gl.BindVertexArray(0);
     }
 
+    /// <summary>
+    /// キャッシュされたテクスチャとGPUメッシュをすべて削除して、Assimpのリソースも解放する。GC.SuppressFinalizeでファイナライザの呼び出しを抑制。
+    /// </summary>
     public void Dispose()
     {
-        foreach (var tex in _textureCache.Values) _gl.DeleteTexture(tex);
+        foreach (var tex in _textureCache.Values)
+        {
+            _gl.DeleteTexture(tex);
+        }
         foreach (var model in _modelCache.Values)
         {
             foreach (var mesh in model.Meshes)
             {
-                if (mesh.Vao != 0) _gl.DeleteVertexArray(mesh.Vao);
-                if (mesh.Vbo != 0) _gl.DeleteBuffer(mesh.Vbo);
-                if (mesh.Ebo != 0) _gl.DeleteBuffer(mesh.Ebo);
+                if (mesh.Vao != 0)
+                {
+                    _gl.DeleteVertexArray(mesh.Vao);
+                }
+                if (mesh.Vbo != 0)
+                {
+                    _gl.DeleteBuffer(mesh.Vbo);
+                }
+                if (mesh.Ebo != 0)
+                {
+                    _gl.DeleteBuffer(mesh.Ebo);
+                }
             }
         }
         _assimp.Dispose();
