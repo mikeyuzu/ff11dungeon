@@ -1,0 +1,233 @@
+NOESIS_MULTIFBX_FILE_VERSION 1
+
+SequenceEntry
+{
+	name		"wlk1"
+	filename	"wlk1.noefbxmulti - wlk1.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"amf1"
+	filename	"wlk1.noefbxmulti - amf1.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"aml1"
+	filename	"wlk1.noefbxmulti - aml1.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"amr1"
+	filename	"wlk1.noefbxmulti - amr1.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"at00"
+	filename	"wlk1.noefbxmulti - at00.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"at01"
+	filename	"wlk1.noefbxmulti - at01.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"at10"
+	filename	"wlk1.noefbxmulti - at10.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"at11"
+	filename	"wlk1.noefbxmulti - at11.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"at20"
+	filename	"wlk1.noefbxmulti - at20.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"at21"
+	filename	"wlk1.noefbxmulti - at21.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"btl0"
+	filename	"wlk1.noefbxmulti - btl0.fbx"
+	framerate	"7.000000"
+}
+
+SequenceEntry
+{
+	name		"btl1"
+	filename	"wlk1.noefbxmulti - btl1.fbx"
+	framerate	"7.000000"
+}
+
+SequenceEntry
+{
+	name		"gdm1"
+	filename	"wlk1.noefbxmulti - gdm1.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"mvb1"
+	filename	"wlk1.noefbxmulti - mvb1.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mvl1"
+	filename	"wlk1.noefbxmulti - mvl1.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mvr1"
+	filename	"wlk1.noefbxmulti - mvr1.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"pym1"
+	filename	"wlk1.noefbxmulti - pym1.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"run1"
+	filename	"wlk1.noefbxmulti - run1.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"amb1"
+	filename	"wlk1.noefbxmulti - amb1.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"ind0"
+	filename	"wlk1.noefbxmulti - ind0.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"ind1"
+	filename	"wlk1.noefbxmulti - ind1.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"otd0"
+	filename	"wlk1.noefbxmulti - otd0.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"otd1"
+	filename	"wlk1.noefbxmulti - otd1.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"cm01"
+	filename	"wlk1.noefbxmulti - cm01.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"bb11"
+	filename	"wlk1.noefbxmulti - bb11.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"bf01"
+	filename	"wlk1.noefbxmulti - bf01.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"bf11"
+	filename	"wlk1.noefbxmulti - bf11.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"bb01"
+	filename	"wlk1.noefbxmulti - bb01.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"cm11"
+	filename	"wlk1.noefbxmulti - cm11.fbx"
+	framerate	"9.000000"
+}
+
+SequenceEntry
+{
+	name		"cor1"
+	filename	"wlk1.noefbxmulti - cor1.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"dbm1"
+	filename	"wlk1.noefbxmulti - dbm1.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"ded1"
+	filename	"wlk1.noefbxmulti - ded1.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"dfm1"
+	filename	"wlk1.noefbxmulti - dfm1.fbx"
+	framerate	"30.000000"
+}
+

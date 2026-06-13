@@ -1,0 +1,114 @@
+NOESIS_MULTIFBX_FILE_VERSION 1
+
+SequenceEntry
+{
+	name		"at02"
+	filename	"at02.noefbxmulti - at02.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"btl2"
+	filename	"at02.noefbxmulti - btl2.fbx"
+	framerate	"7.000000"
+}
+
+SequenceEntry
+{
+	name		"ine2"
+	filename	"at02.noefbxmulti - ine2.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"ote2"
+	filename	"at02.noefbxmulti - ote2.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"dfi6"
+	filename	"at02.noefbxmulti - dfi6.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"dbi6"
+	filename	"at02.noefbxmulti - dbi6.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"gdi6"
+	filename	"at02.noefbxmulti - gdi6.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"at12"
+	filename	"at02.noefbxmulti - at12.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"at22"
+	filename	"at02.noefbxmulti - at22.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"pyi6"
+	filename	"at02.noefbxmulti - pyi6.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"in02"
+	filename	"at02.noefbxmulti - in02.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"ot02"
+	filename	"at02.noefbxmulti - ot02.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"at32"
+	filename	"at02.noefbxmulti - at32.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"at42"
+	filename	"at02.noefbxmulti - at42.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"wa42"
+	filename	"at02.noefbxmulti - wa42.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"wa52"
+	filename	"at02.noefbxmulti - wa52.fbx"
+	framerate	"30.000000"
+}
+

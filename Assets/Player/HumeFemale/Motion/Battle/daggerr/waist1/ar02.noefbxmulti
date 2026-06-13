@@ -1,0 +1,72 @@
+NOESIS_MULTIFBX_FILE_VERSION 1
+
+SequenceEntry
+{
+	name		"ar02"
+	filename	"ar02.noefbxmulti - ar02.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"ar22"
+	filename	"ar02.noefbxmulti - ar22.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"ar32"
+	filename	"ar02.noefbxmulti - ar32.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"i0a2"
+	filename	"ar02.noefbxmulti - i0a2.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"o1a2"
+	filename	"ar02.noefbxmulti - o1a2.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"pyi6"
+	filename	"ar02.noefbxmulti - pyi6.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"gdi6"
+	filename	"ar02.noefbxmulti - gdi6.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"dbi6"
+	filename	"ar02.noefbxmulti - dbi6.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"dfi6"
+	filename	"ar02.noefbxmulti - dfi6.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"btl2"
+	filename	"ar02.noefbxmulti - btl2.fbx"
+	framerate	"7.000000"
+}
+

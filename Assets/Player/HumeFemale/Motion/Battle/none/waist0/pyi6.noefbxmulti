@@ -1,0 +1,65 @@
+NOESIS_MULTIFBX_FILE_VERSION 1
+
+SequenceEntry
+{
+	name		"pyi6"
+	filename	"pyi6.noefbxmulti - pyi6.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"at12"
+	filename	"pyi6.noefbxmulti - at12.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"btl2"
+	filename	"pyi6.noefbxmulti - btl2.fbx"
+	framerate	"7.000000"
+}
+
+SequenceEntry
+{
+	name		"at02"
+	filename	"pyi6.noefbxmulti - at02.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"ink2"
+	filename	"pyi6.noefbxmulti - ink2.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"otk2"
+	filename	"pyi6.noefbxmulti - otk2.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"dbi6"
+	filename	"pyi6.noefbxmulti - dbi6.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"dfi6"
+	filename	"pyi6.noefbxmulti - dfi6.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"gdi6"
+	filename	"pyi6.noefbxmulti - gdi6.fbx"
+	framerate	"30.000000"
+}
+
