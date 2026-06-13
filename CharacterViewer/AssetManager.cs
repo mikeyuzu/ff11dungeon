@@ -29,9 +29,9 @@ public class AssetManager : IDisposable
 
         var candidates = new[]
         {
-            Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "Assets")),
-            Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "..", "Assets")),
-            @"C:\project\ff11_dungeon\Assets",
+            Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "Assets")),
+            Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets")),
+            Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "Assets")),
         };
 
         AssetBasePath = candidates.FirstOrDefault(Directory.Exists) ?? candidates[^1];
