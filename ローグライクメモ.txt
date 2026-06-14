@@ -1,0 +1,241 @@
+『トルネコの大冒険』や『風来のシレン』といった不思議のダンジョン系のマップ生成は、ローグライクのアルゴリズムの中でも「区画割法（グリッド分割 / BSP: Binary Space Partitioning の変形）」と呼ばれる手法が使われています。
+
+単に迷路を作る「穴掘り法」などとは異なり、「全体をいくつかの区画に分け、その中に部屋を作り、部屋同士を通路で繋ぐ」というステップを踏むのが特徴です。最終的に3Dにする場合も、2Dのグリッド（2次元配列）上でこのロジックを完成させてから3Dモデルを配置していく流れが最もスマートです。
+
+ロジックの概要と、参考になるGitHubリポジトリ、そしてC#による軽量な実装コード例をまとめました。
+
+---
+
+## 不思議のダンジョン系マップ生成の基本ロジック
+
+基本は以下の4ステップで生成されます。
+
+```
+【1. 画面の区画分け】       【2. 各区画に部屋を作る】     【3. 部屋から通路を伸ばす】
+┌───────┬───────┐   ┌───────┬───────┐   ┌───────┬───────┐
+│       │       │   │ ┌───┐ │       │   │ ┌───┐ │       │
+│       │       │   │ │部屋 │ │ ┌───┐ │   │ │部屋 ├─┼─┐     │
+├───────┼───────┤   │ └───┘ │ │部屋 │ │   │ └───┘ │ │┌┴──┐ │
+│       │       │   ├───────┤ └───┘ │   ├───────┤ ││部屋│ │
+│       │       │   │ ┌───┐ │       │   │ ┌───┐ │ │└───┘ │
+└───────┴───────┘   │ │部屋 │ │       │   │ │部屋 ├─┘       │
+                    │ └───┘ │       │   │ └───┘ │         │
+                    └───────┴───────┘   └───────┴───────┘
+
+```
+
+1. **区画の分割 (Grid Split)**
+マップ全体を $2 \times 2$ や $3 \times 3$ などの大雑把なグリッド（区画）に分割します。※厳密な二分木（BSP）でランダムに分ける手法もありますが、不思議のダンジョン風にするなら固定またはランダムな格子状分割が近いです。
+2. **部屋の生成 (Room Generation)**
+分割した各区画の中に、一回り小さいランダムなサイズ（幅と高さ）の長方形の部屋を配置します。すべての区画に作らず、確率で「部屋のない区画（通路だけの交差点になる）」を作るとバリエーションが出ます。
+3. **通路の接続 (Corridor Connection)**
+隣り合う区画同士の部屋（または区画の境界）を繋ぐ通路を伸ばします。
+4. **データの2D配列化**
+「壁」「床（部屋）」「通路」「階段」などのIDを持った2次元配列（グリッドマップ）を出力します。
+
+---
+
+## Githubで見つかる優秀な実装・コード
+
+GitHub上でコード構造の参考になるリポジトリをいくつかピックアップしました。最終的に3D（UnityやUnreal Engineなど）に持っていきやすいものを中心に選んでいます。
+
+* **[alexanderfast / roguelike-dungeon-generator](https://github.com/alexanderfast/roguelike-dungeon-generator)**
+* **特徴:** まさに「区画に分けて部屋を作り、接続する」という不思議のダンジョン系そのもののアルゴリズムがコンパクトに実装されています。Readmeに日本語訳のようなわかりやすい解説ステップがあります。オリジナルはJSですが、C#へのポート版リンクも含まれています。
+
+
+* **[AtTheMatinee / dungeon-generation](https://github.com/AtTheMatinee/dungeon-generation)**
+* **特徴:** Python実装ですが、BSP（二分木分割）やCity Buildingsなど、ローグライクで使われる主要なマップ生成アルゴリズムが視覚的にデモとともにまとめられており、ロジックの比較・理解に最適です。
+
+
+* **[Gillesw / RogueSharp](https://www.google.com/search?q=https://github.com/Gillesw/RogueSharp)**
+* **特徴:** C#で書かれた非常にメジャーなローグライク用ライブラリ。マップ生成だけでなく、視界（FOV）の計算やパスファインディングも含まれています。コードベースが綺麗なので、C#で本格的にロジックを組み込みたい場合に参考になります。
+
+
+
+---
+
+## 2Dマップ生成のミニマルコード例 (C#)
+
+UnityやC#環境ですぐに検証・カスタマイズできるよう、「$2 \times 2$ の4区画に分割し、部屋を作って通路でループ状に繋ぐ」ロジックを簡略化したコード（約120行）を作成しました。
+
+```csharp
+using System;
+using System.Collections.Generic;
+
+public class DungeonGenerator
+{
+    public enum TileType { Wall, Floor, Corridor }
+
+    public struct Room { public int X, Y, Width, Height; }
+    public struct Partition { public int X, Y, Width, Height; }
+
+    private int mapWidth = 60;
+    private int mapHeight = 40;
+    private TileType[,] map;
+    private Random rand = new Random();
+
+    public TileType[,] Generate()
+    {
+        map = new TileType[mapWidth, mapHeight];
+        
+        // 1. 全体を壁で埋める
+        for (int x = 0; x < mapWidth; x++)
+            for (int y = 0; y < mapHeight; y++)
+                map[x, y] = TileType.Wall;
+
+        // 2. 4つの区画（2x2）に分割
+        int midX = mapWidth / 2;
+        int midY = mapHeight / 2;
+        Partition[] parts = new Partition[4] {
+            new Partition { X = 2,          Y = 2,          Width = midX - 3,          Height = midY - 3 },          // 左下
+            new Partition { X = midX + 1,   Y = 2,          Width = mapWidth - midX - 3,Height = midY - 3 },          // 右下
+            new Partition { X = 2,          Y = midY + 1,   Width = midX - 3,          Height = mapHeight - midY - 3 },// 左上
+            new Partition { X = midX + 1,   Y = midY + 1,   Width = mapWidth - midX - 3,Height = mapHeight - midY - 3 } // 右上
+        };
+
+        Room[] rooms = new Room[4];
+
+        // 3. 各区画に部屋を作る
+        for (int i = 0; i < 4; i++)
+        {
+            rooms[i] = CreateRoomInPartition(parts[i]);
+            DigRoom(rooms[i]);
+        }
+
+        // 4. 部屋同士を通路で繋ぐ (0-1, 1-3, 3-2, 2-0 で四角く1周繋ぐ)
+        ConnectRoomsHorizontal(rooms[0], rooms[1]);
+        ConnectRoomsVertical(rooms[1], rooms[3]);
+        ConnectRoomsHorizontal(rooms[2], rooms[3]);
+        ConnectRoomsVertical(rooms[0], rooms[2]);
+
+        return map;
+    }
+
+    private Room CreateRoomInPartition(Partition p)
+    {
+        // 区画サイズに合わせてランダムな部屋サイズを決定（最小サイズ 5x5）
+        int w = rand.Next(5, p.Width - 2);
+        int h = rand.Next(5, p.Height - 2);
+        int x = p.X + rand.Next(1, p.Width - w - 1);
+        int y = p.Y + rand.Next(1, p.Height - h - 1);
+        return new Room { X = x, Y = y, Width = w, Height = h };
+    }
+
+    private void DigRoom(Room r)
+    {
+        for (int x = r.X; x < r.X + r.Width; x++)
+            for (int y = r.Y; y < r.Y + r.Height; y++)
+                map[x, y] = TileType.Floor;
+    }
+
+    private void ConnectRoomsHorizontal(Room r1, Room r2)
+    {
+        // 部屋1の右端中央から部屋2の左端中央へL字に繋ぐ
+        int startX = r1.X + r1.Width;
+        int startY = r1.Y + r1.Height / 2;
+        int endX = r2.X;
+        int endY = r2.Y + r2.Height / 2;
+
+        int midX = (startX + endX) / 2;
+        DigCorridorHorizontal(startX, midX, startY);
+        DigCorridorVertical(startY, endY, midX);
+        DigCorridorHorizontal(midX, endX, endY);
+    }
+
+    private void ConnectRoomsVertical(Room r1, Room r2)
+    {
+        // 部屋1の上端中央から部屋2の下端中央へL字に繋ぐ
+        int startX = r1.X + r1.Width / 2;
+        int startY = r1.Y + r1.Height;
+        int endX = r2.X + r2.Width / 2;
+        int endY = r2.Y;
+
+        int midY = (startY + endY) / 2;
+        DigCorridorVertical(startY, midY, startX);
+        DigCorridorHorizontal(startX, endX, midY);
+        DigCorridorVertical(midY, endY, endX);
+    }
+
+    private void DigCorridorHorizontal(int x1, int x2, int y)
+    {
+        int start = Math.Min(x1, x2);
+        int end = Math.Max(x1, x2);
+        for (int x = start; x <= end; x++)
+            if (map[x, y] == TileType.Wall) map[x, y] = TileType.Corridor;
+    }
+
+    private void DigCorridorVertical(int y1, int y2, int x)
+    {
+        int start = Math.Min(y1, y2);
+        int end = Math.Max(y1, y2);
+        for (int y = start; y <= end; y++)
+            if (map[x, y] == TileType.Wall) map[x, y] = TileType.Corridor;
+    }
+}
+
+```
+
+### このロジックを3D化するアプローチ
+
+このロジックで生成された `TileType[,]` 配列さえ手に入れば、3D化は非常にシンプルです。
+
+* 3D空間上の基準点から、ループで `map[x, y]` を走査します。
+* `Wall` であれば、壁のアセット（Cubeや独自の壁メッシュ）を `Instantiate` などで配置します。
+* `Floor` や `Corridor` であれば、床のアセットを配置します。
+* **オートタイル処理:** 壁を配置する際、周囲8マスの `TileType` をチェックして「角の壁」「直線の壁」などを出し分けることで、一気にクオリティの高い3Dダンジョンに化けます。
+
+まずはこの2Dグリッド上で、部屋の数やサイズを変更するなどのチューニングを行ってみてください！
+
+
+一般的な海外のローグライク（『Rogue』や『NetHack』など）のマップ生成と比べると、**『不思議のダンジョン』シリーズ（特にトルネコ・シレン）には明確な「プレイヤーの遊びやすさと、シビアなゲーム性」を両立させるための特有のルールやロジック**が仕込まれています。
+
+単にランダムに部屋と通路を繋ぐだけでは、不思議のダンジョン特有の「あのプレイ感」にはなりません。具体的には、以下のようなロジックが特徴的です。
+
+---
+
+## 1. 部屋と通路の「境界線（入り口）」の厳密な管理
+
+海外の古典的ローグライクでは、部屋から通路がランダムに何本も伸びたり、部屋の隅から通路が出たりします。しかし、不思議のダンジョンでは以下のルールが徹底されています。
+
+* **必ず部屋の「辺（壁面）」から直線で通路が伸びる**（角からは出ない）。
+* **「部屋の床」と「通路」の切り替わり（境界線）がロジック上、明確に区別されている。**
+
+> **ゲーム性への影響：**
+> シレンやトルネコでは、**「通路から部屋に入った瞬間に、部屋にいるモンスター全員に気づかれる（動き出す）」**という仕様があります。また、部屋の一歩手前（通路の最後の一マス）で足踏みして部屋の様子を見る、といった戦術が成り立つのは、この境界線が厳密に判定されているからです。
+
+## 2. 「不完全なグリッド接続」によるマッピングの楽しさ
+
+先ほどの簡易コードでは $2 \times 2$ の4つの区画を綺麗に1周（ループ状に）繋ぎましたが、不思議のダンジョンではここに**ランダムな間引きと行き止まり**のロジックが入ります。
+
+* **部屋のない区画（交差点）：** 分割した区画の中に「部屋」を作らず、通路が交差するだけのポイントを確率で発生させる。
+* **行き止まり通路：** どこにも繋がっていない、数マスで行き止まりになる通路をあえて生成する。
+* **孤立した部屋（隠し部屋）：** 最初から通路が繋がっていない部屋を生成し、壁を「爆弾」や「つるはし」で壊したときだけ繋がるようにする。
+
+> **ゲーム性への影響：**
+> プレイヤーが「こっちに行けば次の部屋があるはず」と予測を立てて歩く楽しさ（マッピングの快感）が生まれます。また、行き止まりに追い詰められるリスクや、隠し部屋を見つけるワクワク感もこれによって作られています。
+
+## 3. 2つの特殊な部屋生成モード（モンスターハウス / 大部屋）
+
+不思議のダンジョンを象徴する「モンスターハウス」**や**「大部屋の巻物を使ったときの挙動」は、マップ生成の段階（またはアイテム使用時の再生成ロジック）で特殊なフラグ管理がされています。
+
+* **モンスターハウス：** 特定の部屋オブジェクトに `IsMonsterHouse = true` のようなフラグを立てます。生成時、その部屋の中にだけ「高密度なアイテム配置」と「大量のモンスター配置」を集中させ、侵入した瞬間に特殊なBGMを流すトリガーにします。
+* **大部屋（シャッフルダンジョン含む）：**
+区画分けのステップをすべてスキップし、「マップサイズ全体 ＝ 1つの部屋」として生成するモードです。周囲1マスだけを壁（進入不可）にし、それ以外をすべて床にします。
+
+## 4. アイテム・階段・モンスターの配置制限ロジック
+
+マップの形状ができた後、オブジェクトを配置する際にも特有の制約（バリデーション）がかかっています。
+
+* **階段の孤立防止：** 階段は必ず「通路が1本以上繋がっている部屋」の床に配置され、行き止まりの通路の先端や、進入できない孤立した部屋には（基本的には）配置されません。
+* **プレイヤーとモンスターの初期距離：** 開幕でプレイヤーの目の前にいきなりモンスターが敷き詰められて即死するのを防ぐため、プレイヤーが配置された部屋とは「別の部屋」に初期モンスターの多くを分散配置するロジックになっています。
+
+---
+
+### 3D開発に向けたワンポイントアドバイス
+
+3Dにする際、特に重要になるのが「1. 部屋と通路の境界線」**です。
+2Dの配列データを作る時点で、単に `Floor（床）` と `Corridor（通路）` を分けるだけでなく、**`RoomEntrance（部屋の入り口）` という専用のタイルIDを持たせておくことを強くおすすめします。
+
+3Dの空間に配置したとき、その「入り口マス」に透明なコライダー（トリガー）を仕込んでおけば、「プレイヤーが部屋に入った/出た」の判定が非常に楽になり、カメラの引き具合（部屋全体を見せるか、通路用のクローズアップにするか）の切り替えや、敵の活性化フラグの制御がスムーズになります。
+
+今回は一般的な仕組みを中心にお話ししましたが、具体的に「モンスターハウスの再現方法」や「大部屋の時の視界の制御」など、さらに深掘りしたい特定のシステムはありますか？
