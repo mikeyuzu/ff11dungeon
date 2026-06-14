@@ -40,12 +40,14 @@ public enum RenderMode
 public class CharacterModel
 {
     private readonly AssetManager _assetManager;
+    private readonly CharacterData _characterData = new();
 
     private string _currentCharacter = "HumeFemale";
 
     private readonly Dictionary<PartType, LoadedModel?> _parts = [];
     private readonly Dictionary<PartType, uint> _textures = [];
     private readonly Dictionary<PartType, bool> _partVisible = [];
+    private readonly Dictionary<PartType, int> _partVariantIndex = [];
 
     private readonly List<BoneNode> _skeleton = [];
     private readonly Dictionary<string, BoneNode> _boneByName = [];
@@ -77,227 +79,6 @@ public class CharacterModel
     private bool _showBones;
 
     private readonly string _basePlayerPath = "Player";
-    private static readonly Dictionary<PartType, string> PartPaths = new()
-    {
-        [PartType.Face] = "Face/0000/0000.fbx",
-        [PartType.Body] = "Body/00000/00000.fbx",
-        [PartType.Hands] = "Hands/00000/00000.fbx",
-        [PartType.Legs] = "Legs/00000/00000.fbx",
-        [PartType.Feet] = "Feet/00000/00000.fbx",
-    };
-
-    private static readonly Dictionary<CharacterType, Dictionary<PartType, string>> TexturePaths = new()
-    {
-        [CharacterType.HumeMale] = new()
-        {
-            [PartType.Face] = "Face/0000/tim     hm_hed11.tga",
-            [PartType.Body] = "Body/00000/tim     hm_ba1_1.tga",
-            [PartType.Hands] = "Hands/00000/tim     hm_ga1_1.tga",
-            [PartType.Legs] = "Legs/00000/tim     hm_la1_1.tga",
-            [PartType.Feet] = "Feet/00000/tim     hm_fa1_1.tga",
-        },
-        [CharacterType.HumeFemale] = new()
-        {
-            [PartType.Face] = "Face/0000/tim     hf_h41_1.tga",
-            [PartType.Body] = "Body/00000/tim     hf_ba1_1.tga",
-            [PartType.Hands] = "Hands/00000/tim     hf_ga1_1.tga",
-            [PartType.Legs] = "Legs/00000/tim     hf_la1_1.tga",
-            [PartType.Feet] = "Feet/00000/tim     hf_fa1_1.tga",
-        },
-        [CharacterType.ElvaanMale] = [],
-        [CharacterType.ElvaanFemale] = [],
-        [CharacterType.TarutaruMale] = [],
-        [CharacterType.TarutaruFemale] = [],
-        [CharacterType.Mithra] = [],
-        [CharacterType.Galka] = [],
-    };
-
-    private static readonly Dictionary<CharacterType, Dictionary<string, (string upper, string lower, string waist)>> MotionPaths = new()
-    {
-        [CharacterType.HumeMale] = new()
-        {
-            ["idle"]     = ("Motion/Base/idl0.fbx", "Motion/Base/idl1.fbx", "Motion/Base/idl2.fbx"),
-            ["walk"]     = ("Motion/Base/wlk0.fbx", "Motion/Base/wlk1.fbx", "Motion/Base/wlk2.fbx"),
-            ["run"]      = ("Motion/Base/run0.fbx", "Motion/Base/run1.fbx", "Motion/Base/run2.fbx"),
-            ["ability"]  = ("Motion/Base/cm00.fbx", "Motion/Base/cm01.fbx", "Motion/Base/cm02.fbx"),
-            ["item"]     = ("Motion/Base/mi20.fbx", "Motion/Base/mi21.fbx", "Motion/Base/mi22.fbx"),
-            ["throw"]    = ("Motion/Base/na30.fbx", "Motion/Base/na31.fbx", "Motion/Base/na32.fbx"),
-            ["bmagic"]   = ("Motion/Base/mb10.fbx", "Motion/Base/mb11.fbx", "Motion/Base/mb12.fbx"),
-            ["wmagic"]   = ("Motion/Base/mw10.fbx", "Motion/Base/mw11.fbx", "Motion/Base/mw12.fbx"),
-            ["ninjutsu"] = ("Motion/Base/mn10.fbx", "Motion/Base/mn11.fbx", "Motion/Base/mn12.fbx"),
-            ["summoner"] = ("Motion/Base/ms10.fbx", "Motion/Base/ms11.fbx", "Motion/Base/ms12.fbx"),
-            ["heal"]     = ("Motion/Base/rx10.fbx", "Motion/Base/rx11.fbx", "Motion/Base/rx12.fbx"),
-            ["death"]    = ("Motion/Base/ded0.fbx", "Motion/Base/ded1.fbx", "Motion/Base/ded2.fbx"),
-            ["reflesh"]  = ("Motion/Base/std0.fbx", "Motion/Base/std1.fbx", "Motion/Base/std2.fbx"),
-        },
-        [CharacterType.HumeFemale] = new()
-        {
-            ["idle"]     = ("Motion/Base/idl0.fbx", "Motion/Base/idl1.fbx", "Motion/Base/idl2.fbx"),
-            ["walk"]     = ("Motion/Base/wlk0.fbx", "Motion/Base/wlk1.fbx", "Motion/Base/wlk2.fbx"),
-            ["run"]      = ("Motion/Base/run0.fbx", "Motion/Base/run1.fbx", "Motion/Base/run2.fbx"),
-            ["ability"]  = ("Motion/Base/cm00.fbx", "Motion/Base/cm01.fbx", "Motion/Base/cm02.fbx"),
-            ["item"]     = ("Motion/Base/mi20.fbx", "Motion/Base/mi21.fbx", "Motion/Base/mi22.fbx"),
-            ["throw"]    = ("Motion/Base/na30.fbx", "Motion/Base/na31.fbx", "Motion/Base/na32.fbx"),
-            ["bmagic"]   = ("Motion/Base/mb10.fbx", "Motion/Base/mb11.fbx", "Motion/Base/mb12.fbx"),
-            ["wmagic"]   = ("Motion/Base/mw10.fbx", "Motion/Base/mw11.fbx", "Motion/Base/mw12.fbx"),
-            ["ninjutsu"] = ("Motion/Base/mn10.fbx", "Motion/Base/mn11.fbx", "Motion/Base/mn12.fbx"),
-            ["summoner"] = ("Motion/Base/ms10.fbx", "Motion/Base/ms11.fbx", "Motion/Base/ms12.fbx"),
-            ["heal"]     = ("Motion/Base/rx10.fbx", "Motion/Base/rx11.fbx", "Motion/Base/rx12.fbx"),
-            ["death"]    = ("Motion/Base/ded0.fbx", "Motion/Base/ded1.fbx", "Motion/Base/ded2.fbx"),
-            ["reflesh"]  = ("Motion/Base/std0.fbx", "Motion/Base/std1.fbx", "Motion/Base/std2.fbx"),
-        },
-        [CharacterType.ElvaanMale] = [],
-        [CharacterType.ElvaanFemale] = [],
-        [CharacterType.TarutaruMale] = [],
-        [CharacterType.TarutaruFemale] = [],
-        [CharacterType.Mithra] = [],
-        [CharacterType.Galka] = [],
-    };
-
-    private static readonly Dictionary<int, string> WeaponMotionFolder = new()
-    {
-        [0] = "none",
-        [1] = "hand",
-        [2] = "dagger",
-        [3] = "sword",
-        [4] = "gsword",
-        [5] = "axe",
-        [6] = "gaxe",
-        [7] = "scythe",
-        [8] = "polearm",
-        [9] = "katana",
-        [10] = "gkatana",
-        [11] = "club",
-        [12] = "gclub",
-    };
-
-    private static readonly Dictionary<int, bool> WeaponDualWieldFlag = new()
-    {
-        [0] = false,
-        [1] = false,
-        [2] = true,
-        [3] = true,
-        [4] = false,
-        [5] = true,
-        [6] = false,
-        [7] = false,
-        [8] = false,
-        [9] = true,
-        [10] = false,
-        [11] = true,
-        [12] = false,
-    };
-
-    private static readonly Dictionary<CharacterType, Dictionary<int, string[]>> MainAttachBones = new()
-    {
-        [CharacterType.HumeMale] = new()
-        {
-            [0] = [""],
-            [1] = ["bone0003"],
-            [2] = ["bone0009"],
-            [3] = ["bone0005"],
-            [4] = ["bone0017"],
-            [5] = ["bone0006"],
-            [6] = ["bone0015"],
-            [7] = ["bone0015"],
-            [8] = ["bone0015"],
-            [9] = ["bone0011"],
-            [10] = ["bone0008"],
-            [11] = ["bone0006"],
-            [12] = ["bone0015"],
-        },
-        [CharacterType.HumeFemale] = new()
-        {
-            [0] = [""],
-            [1] = ["bone0093"],
-            [2] = ["bone0086"],
-            [3] = ["bone0090"],
-            [4] = ["bone0071"],
-            [5] = ["bone0095"],
-            [6] = ["bone0092"],
-            [7] = ["bone0092"],
-            [8] = ["bone0092"],
-            [9] = ["bone0083"],
-            [10] = ["bone0090"],
-            [11] = ["bone0095"],
-            [12] = ["bone0077"],
-        },
-        [CharacterType.ElvaanMale] = [],
-        [CharacterType.ElvaanFemale] = [],
-        [CharacterType.TarutaruMale] = [],
-        [CharacterType.TarutaruFemale] = [],
-        [CharacterType.Mithra] = [],
-        [CharacterType.Galka] = [],
-    };
-
-    private static readonly Dictionary<CharacterType, Dictionary<int, (string normal, string? dualWield)>> SubAttachBones = new()
-    {
-        [CharacterType.HumeMale] = new()
-        {
-            [0] = ("", null),
-            [1] = ("bone0024", null),
-            [2] = ("bone0009", "bone0022"),
-            [3] = ("bone0005", "bone0019"),
-            [5] = ("bone0006", "bone0020"),
-            [9] = ("bone0011", "bone0023"),
-            [11] = ("bone0006", "bone0020"),
-        },
-        [CharacterType.HumeFemale] = new()
-        {
-            [0] = ("", null),
-            [1] = ("bone0094", null),
-            [2] = ("bone0086", "bone0075"),
-            [3] = ("bone0090", "bone0075"),
-            [5] = ("bone0095", "bone0096"),
-            [9] = ("bone0083", "bone0084"),
-            [11] = ("bone0095", "bone0096"),
-        },
-        [CharacterType.ElvaanMale] = [],
-        [CharacterType.ElvaanFemale] = [],
-        [CharacterType.TarutaruMale] = [],
-        [CharacterType.TarutaruFemale] = [],
-        [CharacterType.Mithra] = [],
-        [CharacterType.Galka] = [],
-    };
-
-    public static readonly Dictionary<int, string> WeaponCategories = new()
-    {
-        [0] = "盾",
-        [1] = "格闘",
-        [2] = "短剣",
-        [3] = "片手剣",
-        [4] = "両手剣",
-        [5] = "片手斧",
-        [6] = "両手斧",
-        [7] = "両手鎌",
-        [8] = "両手槍",
-        [9] = "片手刀",
-        [10] = "両手刀",
-        [11] = "片手棍",
-        [12] = "両手棍",
-    };
-
-    private static readonly Dictionary<string, string> WeaponTextures = new()
-    {
-        ["01001"] = "tim     hf_clw1_.tga",
-        ["01022"] = "tim     hf_clw7_.tga",
-        ["02001"] = "tim     hf_knf1_.tga",
-        ["02029"] = "tim     hf_knf9_.tga",
-        ["03001"] = "tim     hf_rap2r.tga",
-        ["03020"] = "tim     hf_swo3_.tga",
-        ["04001"] = "tim     hf_2hs1_.tga",
-        ["04010"] = "tim     hf_2hs5_.tga",
-        ["05001"] = "tim     hf_axe1_.tga",
-        ["05006"] = "tim     hf_axe2_.tga",
-        ["06001"] = "tim     hf_b_ax1.tga",
-        ["06005"] = "tim     hf_b_ax2.tga",
-        ["07001"] = "tim     hf_scy1_.tga",
-        ["08001"] = "tim     hf_spea1.tga",
-        ["09001"] = "tim     hf_shi1_.tga",
-        ["10001"] = "tim     hf_kata1.tga",
-        ["11001"] = "tim     stksp01 .tga",
-        ["12001"] = "tim     hf_wand2.tga",
-    };
 
     /// <summary>
     /// コンストラクタ - アセットマネージャを受け取って初期化する。アセットマネージャはモデルやテクスチャの読み込みに使用される。キャラクターデータの読み込みは行わないので、LoadAsync() を呼び出す必要がある
@@ -306,11 +87,13 @@ public class CharacterModel
     public CharacterModel(AssetManager assetManager)
     {
         _assetManager = assetManager;
+        _characterData = CharacterDataLoader.Load(assetManager.AssetBasePath);
         foreach (PartType part in Enum.GetValues<PartType>())
         {
             _parts[part] = null;
             _textures[part] = 0;
             _partVisible[part] = true;
+            _partVariantIndex[part] = 0;
         }
     }
 
@@ -321,22 +104,47 @@ public class CharacterModel
     public async Task LoadAsync()
     {
         LoadBoneInfo();
-        var raceTexturePaths = TexturePaths.GetValueOrDefault(Enum.Parse<CharacterType>(_currentCharacter), []);
-        foreach (var (part, path) in raceTexturePaths)
+
+        var charData = GetCurrentCharacterData();
+        if (charData != null)
         {
-            var fullPath = $"{_basePlayerPath}/{_currentCharacter}/{path}";
-            _textures[part] = _assetManager.LoadTexture(fullPath);
-        }
-        foreach (var (part, path) in PartPaths)
-        {
-            var fullPath = $"{_basePlayerPath}/{_currentCharacter}/{path}";
-            var model = _assetManager.LoadFbx(fullPath);
-            _parts[part] = model;
-            if (model != null && part == PartType.Face)
+            // パーツのモデルとテクスチャを読み込む（バリアントインデックスに従う）
+            foreach (PartType part in Enum.GetValues<PartType>())
             {
-                BuildSkeleton(model);
+                var partName = part.ToString();
+                if (!charData.Parts.TryGetValue(partName, out var partData) || partData.Variants.Length == 0)
+                {
+                    continue;
+                }
+
+                var variantIndex = _partVariantIndex.GetValueOrDefault(part, 0);
+                var variant = partData.Variants[Math.Clamp(variantIndex, 0, partData.Variants.Length - 1)];
+
+                var modelPath = partData.ModelPattern.Replace("{variant}", variant);
+                var texturePath = partData.TexturePattern.Replace("{variant}", variant);
+
+                var fullModelPath = $"{_basePlayerPath}/{_currentCharacter}/{modelPath}";
+                var fullTexturePath = $"{_basePlayerPath}/{_currentCharacter}/{texturePath}";
+
+                _textures[part] = _assetManager.LoadTexture(fullTexturePath);
+                var model = _assetManager.LoadFbx(fullModelPath);
+                _parts[part] = model;
+                if (model != null && part == PartType.Face)
+                {
+                    BuildSkeleton(model);
+                }
+            }
+
+            // モーションを読み込む
+            foreach (var (motionName, paths) in charData.Motions)
+            {
+                var upperClip = _assetManager.LoadFbx($"{_basePlayerPath}/{_currentCharacter}/{paths.Upper}")?.Animations.FirstOrDefault();
+                var lowerClip = _assetManager.LoadFbx($"{_basePlayerPath}/{_currentCharacter}/{paths.Lower}")?.Animations.FirstOrDefault();
+                var waistClip = _assetManager.LoadFbx($"{_basePlayerPath}/{_currentCharacter}/{paths.Waist}")?.Animations.FirstOrDefault();
+                _animations[motionName] = MergeAnimationClips(upperClip, lowerClip, waistClip, motionName);
             }
         }
+
         foreach (var (part, model) in _parts)
         {
             if (part == PartType.Face || model == null)
@@ -345,14 +153,7 @@ public class CharacterModel
             }
             MergeBonesIntoSkeleton(model);
         }
-        var raceMotionPaths = MotionPaths.GetValueOrDefault(Enum.Parse<CharacterType>(_currentCharacter), []);
-        foreach (var (motionName, paths) in raceMotionPaths)
-        {
-            var upperClip = _assetManager.LoadFbx($"{_basePlayerPath}/{_currentCharacter}/{paths.upper}")?.Animations.FirstOrDefault();
-            var lowerClip = _assetManager.LoadFbx($"{_basePlayerPath}/{_currentCharacter}/{paths.lower}")?.Animations.FirstOrDefault();
-            var waistClip = _assetManager.LoadFbx($"{_basePlayerPath}/{_currentCharacter}/{paths.waist}")?.Animations.FirstOrDefault();
-            _animations[motionName] = MergeAnimationClips(upperClip, lowerClip, waistClip, motionName);
-        }
+
         LoadBattleMotions();
         UpdateWorldTransforms();
         PlayMotion("idle");
@@ -450,8 +251,12 @@ public class CharacterModel
     /// </summary>
     private void LoadBattleMotions()
     {
-        foreach (var (category, folder) in WeaponMotionFolder)
+        foreach (var (categoryStr, folder) in _characterData.WeaponMotionFolder)
         {
+            if (!int.TryParse(categoryStr, out var category))
+            {
+                continue;
+            }
             var basePath = $"Player/{_currentCharacter}/Motion/Battle/{folder}";
 
             // 戦闘待機(btl)モーション
@@ -463,7 +268,7 @@ public class CharacterModel
             // 攻撃(at1)モーション
             LoadBattleClip($"btl_attack1_{folder}", basePath, "at1");
 
-            if (WeaponDualWieldFlag.TryGetValue(category, out var dual) && dual)
+            if (_characterData.WeaponDualWieldFlag.TryGetValue(categoryStr, out var dual) && dual)
             {
                 // 二刀流用戦闘待機モーション
                 LoadBattleClip($"btl_idl_{folder}_dual", $"{basePath}r", "btl");
@@ -563,6 +368,80 @@ public class CharacterModel
     public float AnimDuration => _activeClip?.Duration ?? 0f;
     public float MotionSpeed { get => _motionSpeed; set => _motionSpeed = value; }
     public bool DualWield => _dualWield;
+    public CharacterData Data => _characterData;
+
+    /// <summary>
+    /// 現在のキャラクタータイプのデータをJSONから取得する
+    /// </summary>
+    private CharacterTypeData? GetCurrentCharacterData()
+    {
+        return _characterData.Characters.GetValueOrDefault(_currentCharacter);
+    }
+
+    /// <summary>
+    /// 指定パーツのバリアント一覧を取得する
+    /// </summary>
+    public string[] GetPartVariants(PartType part)
+    {
+        var charData = GetCurrentCharacterData();
+        if (charData == null) return [];
+        return charData.Parts.GetValueOrDefault(part.ToString())?.Variants ?? [];
+    }
+
+    /// <summary>
+    /// 指定パーツの現在のバリアントインデックスを取得する
+    /// </summary>
+    public int GetPartVariantIndex(PartType part) => _partVariantIndex.GetValueOrDefault(part, 0);
+
+    /// <summary>
+    /// 指定パーツのバリアントを切り替える。インデックスが変わった場合はモデルとテクスチャを再読み込みする
+    /// </summary>
+    public void SetPartVariant(PartType part, int variantIndex)
+    {
+        var charData = GetCurrentCharacterData();
+        if (charData == null) return;
+        var partName = part.ToString();
+        if (!charData.Parts.TryGetValue(partName, out var partData) || partData.Variants.Length == 0) return;
+
+        variantIndex = Math.Clamp(variantIndex, 0, partData.Variants.Length - 1);
+        if (_partVariantIndex.GetValueOrDefault(part, 0) == variantIndex) return;
+
+        _partVariantIndex[part] = variantIndex;
+        var variant = partData.Variants[variantIndex];
+
+        var modelPath = partData.ModelPattern.Replace("{variant}", variant);
+        var texturePath = partData.TexturePattern.Replace("{variant}", variant);
+
+        var fullModelPath = $"{_basePlayerPath}/{_currentCharacter}/{modelPath}";
+        var fullTexturePath = $"{_basePlayerPath}/{_currentCharacter}/{texturePath}";
+
+        _textures[part] = _assetManager.LoadTexture(fullTexturePath);
+        var model = _assetManager.LoadFbx(fullModelPath);
+        _parts[part] = model;
+
+        if (model != null)
+        {
+            MergeBonesIntoSkeleton(model);
+        }
+
+        Console.WriteLine($"[CharacterModel] Part variant changed: {part} -> {variant}");
+    }
+
+    /// <summary>
+    /// WeaponCategoriesをJSONから取得する（UIなどで使用）
+    /// </summary>
+    public Dictionary<int, string> GetWeaponCategories()
+    {
+        var result = new Dictionary<int, string>();
+        foreach (var (key, value) in _characterData.WeaponCategories)
+        {
+            if (int.TryParse(key, out var k))
+            {
+                result[k] = value;
+            }
+        }
+        return result;
+    }
 
     /// <summary>
     /// キャラクターデータの切り替え - モデル、テクスチャ、アニメーションをすべて切り替える。現在はロード済みのデータを切り替えるだけで、再読み込みは行わない
@@ -735,14 +614,18 @@ public class CharacterModel
     /// </summary>
     /// <param name="cat"></param>
     /// <returns></returns>
-    public static bool IsTwoHanded(int cat) => WeaponCategories.TryGetValue(cat, out var n) && n.StartsWith("両手");
+    public bool IsTwoHanded(int cat)
+    {
+        var categories = _characterData.WeaponCategories;
+        return categories.TryGetValue(cat.ToString(), out var n) && n.StartsWith("両手");
+    }
 
     /// <summary>
     /// 武器カテゴリに対応する戦闘モーションのフォルダ名を取得する。フォルダ名がない場合はnullを返す
     /// </summary>
     /// <param name="cat"></param>
     /// <returns></returns>
-    public static string? GetWeaponMotionFolder(int cat) => WeaponMotionFolder.TryGetValue(cat, out var f) ? f : null;
+    public string? GetWeaponMotionFolder(int cat) => _characterData.WeaponMotionFolder.TryGetValue(cat.ToString(), out var f) ? f : null;
 
     /// <summary>
     /// 武器カテゴリに対応するメイン装備のボーン名を取得する。カテゴリがない場合はnullを返す
@@ -751,8 +634,8 @@ public class CharacterModel
     /// <returns></returns>
     public string[]? GetMainAttachBones(int cat)
     {
-        var raceMainAttachBones = MainAttachBones.GetValueOrDefault(Enum.Parse<CharacterType>(_currentCharacter), []);
-        return raceMainAttachBones.GetValueOrDefault(cat);
+        var charData = GetCurrentCharacterData();
+        return charData?.MainAttachBones.GetValueOrDefault(cat.ToString());
     }
     /// <summary>
     /// 武器カテゴリに対応するサブ装備のボーン名を取得する。二刀流可能な武器の場合は、通常と二刀流で異なるボーン名を返す。カテゴリがない場合はnullを返す
@@ -762,9 +645,10 @@ public class CharacterModel
     /// <returns></returns>
     public string[]? GetSubAttachBones(int cat, bool dw)
     {
-        var raceSubAttachBones = SubAttachBones.GetValueOrDefault(Enum.Parse<CharacterType>(_currentCharacter), []);
-        if (!raceSubAttachBones.TryGetValue(cat, out var e)) return null;
-        var bone = dw && e.dualWield != null ? e.dualWield : e.normal;
+        var charData = GetCurrentCharacterData();
+        if (charData == null) return null;
+        if (!charData.SubAttachBones.TryGetValue(cat.ToString(), out var e)) return null;
+        var bone = dw && e.DualWield != null ? e.DualWield : e.Normal;
         return [bone];
     }
 
@@ -776,7 +660,7 @@ public class CharacterModel
     /// <returns></returns>
     private uint LoadWeaponTexture(string slot, string weaponId)
     {
-        if (!WeaponTextures.TryGetValue(weaponId, out var texName)) return 0;
+        if (!_characterData.WeaponTextures.TryGetValue(weaponId, out var texName)) return 0;
         return _assetManager.LoadTexture($"Player/{_currentCharacter}/{slot}/{weaponId}/{texName}");
     }
 
@@ -880,10 +764,23 @@ public class CharacterModel
         {
             return;
         }
-        var raceMainAttachBones = MainAttachBones.GetValueOrDefault(Enum.Parse<CharacterType>(_currentCharacter), []);
-        var raceSubAttachBones = SubAttachBones.GetValueOrDefault(Enum.Parse<CharacterType>(_currentCharacter), []);
-        string? boneName = hand == "right" ? _attachBoneRightOverride ?? raceMainAttachBones.GetValueOrDefault(weapon.Category)?.FirstOrDefault()
-            : _attachBoneLeftOverride ?? (raceSubAttachBones.TryGetValue(weapon.Category, out var e) ? (_dualWield && e.dualWield != null ? e.dualWield : e.normal) : null);
+        var charData = GetCurrentCharacterData();
+        string? boneName = null;
+        if (hand == "right")
+        {
+            boneName = _attachBoneRightOverride ?? charData?.MainAttachBones.GetValueOrDefault(weapon.Category.ToString())?.FirstOrDefault();
+        }
+        else
+        {
+            if (_attachBoneLeftOverride != null)
+            {
+                boneName = _attachBoneLeftOverride;
+            }
+            else if (charData?.SubAttachBones.TryGetValue(weapon.Category.ToString(), out var e) == true)
+            {
+                boneName = _dualWield && e.DualWield != null ? e.DualWield : e.Normal;
+            }
+        }
 
         Matrix4x4 attachMatrix = Matrix4x4.CreateScale(0.01f);
         if (boneName != null && _boneByName.TryGetValue(boneName.ToLower(), out var boneNode))

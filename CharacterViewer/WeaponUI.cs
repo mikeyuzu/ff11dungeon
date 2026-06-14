@@ -261,7 +261,7 @@ public class WeaponUI(CharacterModel character)
             return;
         }
 
-        var folder = CharacterModel.GetWeaponMotionFolder(weapon.Category);
+        var folder = _character.GetWeaponMotionFolder(weapon.Category);
         if (folder == null)
         {
             _currentMotionNames = [.. BaseMotionNames];

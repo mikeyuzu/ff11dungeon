@@ -1,0 +1,241 @@
+{
+  "characters": {
+    "HumeMale": {
+      "parts": {
+        "Face": {
+          "variants": ["0000"],
+          "modelPattern": "Face/{variant}/{variant}.fbx",
+          "texturePattern": "Face/{variant}/tim     hm_hed11.tga"
+        },
+        "Body": {
+          "variants": ["00000", "00001"],
+          "modelPattern": "Body/{variant}/{variant}.fbx",
+          "texturePattern": "Body/{variant}/tim     hm_ba1_1.tga"
+        },
+        "Hands": {
+          "variants": ["00000", "00001"],
+          "modelPattern": "Hands/{variant}/{variant}.fbx",
+          "texturePattern": "Hands/{variant}/tim     hm_ga1_1.tga"
+        },
+        "Legs": {
+          "variants": ["00000", "00001"],
+          "modelPattern": "Legs/{variant}/{variant}.fbx",
+          "texturePattern": "Legs/{variant}/tim     hm_la1_1.tga"
+        },
+        "Feet": {
+          "variants": ["00000", "00001"],
+          "modelPattern": "Feet/{variant}/{variant}.fbx",
+          "texturePattern": "Feet/{variant}/tim     hm_fa1_1.tga"
+        }
+      },
+      "motions": {
+        "idle":     { "upper": "Motion/Base/idl0.fbx", "lower": "Motion/Base/idl1.fbx", "waist": "Motion/Base/idl2.fbx" },
+        "walk":     { "upper": "Motion/Base/wlk0.fbx", "lower": "Motion/Base/wlk1.fbx", "waist": "Motion/Base/wlk2.fbx" },
+        "run":      { "upper": "Motion/Base/run0.fbx", "lower": "Motion/Base/run1.fbx", "waist": "Motion/Base/run2.fbx" },
+        "ability":  { "upper": "Motion/Base/cm00.fbx", "lower": "Motion/Base/cm01.fbx", "waist": "Motion/Base/cm02.fbx" },
+        "item":     { "upper": "Motion/Base/mi20.fbx", "lower": "Motion/Base/mi21.fbx", "waist": "Motion/Base/mi22.fbx" },
+        "throw":    { "upper": "Motion/Base/na30.fbx", "lower": "Motion/Base/na31.fbx", "waist": "Motion/Base/na32.fbx" },
+        "bmagic":   { "upper": "Motion/Base/mb10.fbx", "lower": "Motion/Base/mb11.fbx", "waist": "Motion/Base/mb12.fbx" },
+        "wmagic":   { "upper": "Motion/Base/mw10.fbx", "lower": "Motion/Base/mw11.fbx", "waist": "Motion/Base/mw12.fbx" },
+        "ninjutsu": { "upper": "Motion/Base/mn10.fbx", "lower": "Motion/Base/mn11.fbx", "waist": "Motion/Base/mn12.fbx" },
+        "summoner": { "upper": "Motion/Base/ms10.fbx", "lower": "Motion/Base/ms11.fbx", "waist": "Motion/Base/ms12.fbx" },
+        "heal":     { "upper": "Motion/Base/rx10.fbx", "lower": "Motion/Base/rx11.fbx", "waist": "Motion/Base/rx12.fbx" },
+        "death":    { "upper": "Motion/Base/ded0.fbx", "lower": "Motion/Base/ded1.fbx", "waist": "Motion/Base/ded2.fbx" },
+        "reflesh":  { "upper": "Motion/Base/std0.fbx", "lower": "Motion/Base/std1.fbx", "waist": "Motion/Base/std2.fbx" }
+      },
+      "mainAttachBones": {
+        "0":  [""],
+        "1":  ["bone0003"],
+        "2":  ["bone0009"],
+        "3":  ["bone0005"],
+        "4":  ["bone0017"],
+        "5":  ["bone0006"],
+        "6":  ["bone0015"],
+        "7":  ["bone0015"],
+        "8":  ["bone0015"],
+        "9":  ["bone0011"],
+        "10": ["bone0008"],
+        "11": ["bone0006"],
+        "12": ["bone0015"]
+      },
+      "subAttachBones": {
+        "0":  { "normal": "", "dualWield": null },
+        "1":  { "normal": "bone0024", "dualWield": null },
+        "2":  { "normal": "bone0009", "dualWield": "bone0022" },
+        "3":  { "normal": "bone0005", "dualWield": "bone0019" },
+        "5":  { "normal": "bone0006", "dualWield": "bone0020" },
+        "9":  { "normal": "bone0011", "dualWield": "bone0023" },
+        "11": { "normal": "bone0006", "dualWield": "bone0020" }
+      }
+    },
+    "HumeFemale": {
+      "parts": {
+        "Face": {
+          "variants": ["0000"],
+          "modelPattern": "Face/{variant}/{variant}.fbx",
+          "texturePattern": "Face/{variant}/tim     hf_h41_1.tga"
+        },
+        "Body": {
+          "variants": ["00000", "00001"],
+          "modelPattern": "Body/{variant}/{variant}.fbx",
+          "texturePattern": "Body/{variant}/tim     hf_ba1_1.tga"
+        },
+        "Hands": {
+          "variants": ["00000", "00001"],
+          "modelPattern": "Hands/{variant}/{variant}.fbx",
+          "texturePattern": "Hands/{variant}/tim     hf_ga1_1.tga"
+        },
+        "Legs": {
+          "variants": ["00000", "00001"],
+          "modelPattern": "Legs/{variant}/{variant}.fbx",
+          "texturePattern": "Legs/{variant}/tim     hf_la1_1.tga"
+        },
+        "Feet": {
+          "variants": ["00000", "00001"],
+          "modelPattern": "Feet/{variant}/{variant}.fbx",
+          "texturePattern": "Feet/{variant}/tim     hf_fa1_1.tga"
+        }
+      },
+      "motions": {
+        "idle":     { "upper": "Motion/Base/idl0.fbx", "lower": "Motion/Base/idl1.fbx", "waist": "Motion/Base/idl2.fbx" },
+        "walk":     { "upper": "Motion/Base/wlk0.fbx", "lower": "Motion/Base/wlk1.fbx", "waist": "Motion/Base/wlk2.fbx" },
+        "run":      { "upper": "Motion/Base/run0.fbx", "lower": "Motion/Base/run1.fbx", "waist": "Motion/Base/run2.fbx" },
+        "ability":  { "upper": "Motion/Base/cm00.fbx", "lower": "Motion/Base/cm01.fbx", "waist": "Motion/Base/cm02.fbx" },
+        "item":     { "upper": "Motion/Base/mi20.fbx", "lower": "Motion/Base/mi21.fbx", "waist": "Motion/Base/mi22.fbx" },
+        "throw":    { "upper": "Motion/Base/na30.fbx", "lower": "Motion/Base/na31.fbx", "waist": "Motion/Base/na32.fbx" },
+        "bmagic":   { "upper": "Motion/Base/mb10.fbx", "lower": "Motion/Base/mb11.fbx", "waist": "Motion/Base/mb12.fbx" },
+        "wmagic":   { "upper": "Motion/Base/mw10.fbx", "lower": "Motion/Base/mw11.fbx", "waist": "Motion/Base/mw12.fbx" },
+        "ninjutsu": { "upper": "Motion/Base/mn10.fbx", "lower": "Motion/Base/mn11.fbx", "waist": "Motion/Base/mn12.fbx" },
+        "summoner": { "upper": "Motion/Base/ms10.fbx", "lower": "Motion/Base/ms11.fbx", "waist": "Motion/Base/ms12.fbx" },
+        "heal":     { "upper": "Motion/Base/rx10.fbx", "lower": "Motion/Base/rx11.fbx", "waist": "Motion/Base/rx12.fbx" },
+        "death":    { "upper": "Motion/Base/ded0.fbx", "lower": "Motion/Base/ded1.fbx", "waist": "Motion/Base/ded2.fbx" },
+        "reflesh":  { "upper": "Motion/Base/std0.fbx", "lower": "Motion/Base/std1.fbx", "waist": "Motion/Base/std2.fbx" }
+      },
+      "mainAttachBones": {
+        "0":  [""],
+        "1":  ["bone0093"],
+        "2":  ["bone0086"],
+        "3":  ["bone0090"],
+        "4":  ["bone0071"],
+        "5":  ["bone0095"],
+        "6":  ["bone0092"],
+        "7":  ["bone0092"],
+        "8":  ["bone0092"],
+        "9":  ["bone0083"],
+        "10": ["bone0090"],
+        "11": ["bone0095"],
+        "12": ["bone0077"]
+      },
+      "subAttachBones": {
+        "0":  { "normal": "", "dualWield": null },
+        "1":  { "normal": "bone0094", "dualWield": null },
+        "2":  { "normal": "bone0086", "dualWield": "bone0075" },
+        "3":  { "normal": "bone0090", "dualWield": "bone0075" },
+        "5":  { "normal": "bone0095", "dualWield": "bone0096" },
+        "9":  { "normal": "bone0083", "dualWield": "bone0084" },
+        "11": { "normal": "bone0095", "dualWield": "bone0096" }
+      }
+    },
+    "ElvaanMale": {
+      "parts": {},
+      "motions": {},
+      "mainAttachBones": {},
+      "subAttachBones": {}
+    },
+    "ElvaanFemale": {
+      "parts": {},
+      "motions": {},
+      "mainAttachBones": {},
+      "subAttachBones": {}
+    },
+    "TarutaruMale": {
+      "parts": {},
+      "motions": {},
+      "mainAttachBones": {},
+      "subAttachBones": {}
+    },
+    "TarutaruFemale": {
+      "parts": {},
+      "motions": {},
+      "mainAttachBones": {},
+      "subAttachBones": {}
+    },
+    "Mithra": {
+      "parts": {},
+      "motions": {},
+      "mainAttachBones": {},
+      "subAttachBones": {}
+    },
+    "Galka": {
+      "parts": {},
+      "motions": {},
+      "mainAttachBones": {},
+      "subAttachBones": {}
+    }
+  },
+  "weaponMotionFolder": {
+    "0": "none",
+    "1": "hand",
+    "2": "dagger",
+    "3": "sword",
+    "4": "gsword",
+    "5": "axe",
+    "6": "gaxe",
+    "7": "scythe",
+    "8": "polearm",
+    "9": "katana",
+    "10": "gkatana",
+    "11": "club",
+    "12": "gclub"
+  },
+  "weaponDualWieldFlag": {
+    "0": false,
+    "1": false,
+    "2": true,
+    "3": true,
+    "4": false,
+    "5": true,
+    "6": false,
+    "7": false,
+    "8": false,
+    "9": true,
+    "10": false,
+    "11": true,
+    "12": false
+  },
+  "weaponCategories": {
+    "0": "盾",
+    "1": "格闘",
+    "2": "短剣",
+    "3": "片手剣",
+    "4": "両手剣",
+    "5": "片手斧",
+    "6": "両手斧",
+    "7": "両手鎌",
+    "8": "両手槍",
+    "9": "片手刀",
+    "10": "両手刀",
+    "11": "片手棍",
+    "12": "両手棍"
+  },
+  "weaponTextures": {
+    "01001": "tim     hf_clw1_.tga",
+    "01022": "tim     hf_clw7_.tga",
+    "02001": "tim     hf_knf1_.tga",
+    "02029": "tim     hf_knf9_.tga",
+    "03001": "tim     hf_rap2r.tga",
+    "03020": "tim     hf_swo3_.tga",
+    "04001": "tim     hf_2hs1_.tga",
+    "04010": "tim     hf_2hs5_.tga",
+    "05001": "tim     hf_axe1_.tga",
+    "05006": "tim     hf_axe2_.tga",
+    "06001": "tim     hf_b_ax1.tga",
+    "06005": "tim     hf_b_ax2.tga",
+    "07001": "tim     hf_scy1_.tga",
+    "08001": "tim     hf_spea1.tga",
+    "09001": "tim     hf_shi1_.tga",
+    "10001": "tim     hf_kata1.tga",
+    "11001": "tim     stksp01 .tga",
+    "12001": "tim     hf_wand2.tga"
+  }
+}
