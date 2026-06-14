@@ -1,4 +1,6 @@
-namespace FF11Dungeon.MapGen.Tests.Unit;
+using MapViewer.MapGen;
+
+namespace MapViewer.Tests.Unit;
 
 /// <summary>
 /// BigRoomGenerator のユニットテスト。
@@ -25,9 +27,9 @@ public class BigRoomGeneratorTests
     {
         var config = CreateBigRoomConfig(60, 40);
         var rng = new Random(42);
-        var generator = new BigRoomGenerator();
+        _ = new BigRoomGenerator();
 
-        var result = generator.Generate(config, rng);
+        var result = BigRoomGenerator.Generate(config, rng);
 
         Assert.Equal(1, result.Room.X);
         Assert.Equal(1, result.Room.Y);
@@ -40,9 +42,9 @@ public class BigRoomGeneratorTests
     {
         var config = CreateBigRoomConfig(60, 40);
         var rng = new Random(42);
-        var generator = new BigRoomGenerator();
+        _ = new BigRoomGenerator();
 
-        var result = generator.Generate(config, rng);
+        var result = BigRoomGenerator.Generate(config, rng);
 
         Assert.Equal(60, result.Grid.Width);
         Assert.Equal(40, result.Grid.Height);
@@ -57,9 +59,9 @@ public class BigRoomGeneratorTests
     {
         var config = CreateBigRoomConfig(20, 20);
         var rng = new Random(42);
-        var generator = new BigRoomGenerator();
+        _ = new BigRoomGenerator();
 
-        var result = generator.Generate(config, rng);
+        var result = BigRoomGenerator.Generate(config, rng);
 
         // Top and bottom rows
         for (int x = 0; x < 20; x++)
@@ -80,9 +82,9 @@ public class BigRoomGeneratorTests
     {
         var config = CreateBigRoomConfig(20, 20);
         var rng = new Random(42);
-        var generator = new BigRoomGenerator();
+        _ = new BigRoomGenerator();
 
-        var result = generator.Generate(config, rng);
+        var result = BigRoomGenerator.Generate(config, rng);
 
         for (int x = 1; x < 19; x++)
         {
@@ -105,9 +107,9 @@ public class BigRoomGeneratorTests
     {
         var config = CreateBigRoomConfig(60, 40);
         var rng = new Random(42);
-        var generator = new BigRoomGenerator();
+        _ = new BigRoomGenerator();
 
-        var result = generator.Generate(config, rng);
+        var result = BigRoomGenerator.Generate(config, rng);
 
         for (int x = 0; x < result.Grid.Width; x++)
         {
@@ -123,9 +125,9 @@ public class BigRoomGeneratorTests
     {
         var config = CreateBigRoomConfig(60, 40);
         var rng = new Random(42);
-        var generator = new BigRoomGenerator();
+        _ = new BigRoomGenerator();
 
-        var result = generator.Generate(config, rng);
+        var result = BigRoomGenerator.Generate(config, rng);
 
         for (int x = 0; x < result.Grid.Width; x++)
         {
@@ -145,9 +147,9 @@ public class BigRoomGeneratorTests
     {
         var config = CreateBigRoomConfig(60, 40);
         var rng = new Random(42);
-        var generator = new BigRoomGenerator();
+        _ = new BigRoomGenerator();
 
-        var result = generator.Generate(config, rng);
+        var result = BigRoomGenerator.Generate(config, rng);
 
         int stairsCount = 0;
         for (int x = 0; x < result.Grid.Width; x++)
@@ -163,9 +165,9 @@ public class BigRoomGeneratorTests
     {
         var config = CreateBigRoomConfig(60, 40);
         var rng = new Random(42);
-        var generator = new BigRoomGenerator();
+        _ = new BigRoomGenerator();
 
-        var result = generator.Generate(config, rng);
+        var result = BigRoomGenerator.Generate(config, rng);
 
         var pos = result.StairsPosition;
         Assert.InRange(pos.X, result.Room.X, result.Room.X + result.Room.Width - 1);
@@ -181,9 +183,9 @@ public class BigRoomGeneratorTests
     {
         var config = CreateBigRoomConfig(60, 40, monsterHouseEnabled: true);
         var rng = new Random(42);
-        var generator = new BigRoomGenerator();
+        _ = new BigRoomGenerator();
 
-        var result = generator.Generate(config, rng);
+        var result = BigRoomGenerator.Generate(config, rng);
 
         Assert.True(result.Metadata.IsMonsterHouse);
         Assert.Equal(3.0f, result.Metadata.ItemDensityMultiplier);
@@ -195,9 +197,9 @@ public class BigRoomGeneratorTests
     {
         var config = CreateBigRoomConfig(60, 40, monsterHouseEnabled: false);
         var rng = new Random(42);
-        var generator = new BigRoomGenerator();
+        _ = new BigRoomGenerator();
 
-        var result = generator.Generate(config, rng);
+        var result = BigRoomGenerator.Generate(config, rng);
 
         Assert.False(result.Metadata.IsMonsterHouse);
         Assert.Equal(1.0f, result.Metadata.ItemDensityMultiplier);
@@ -212,10 +214,10 @@ public class BigRoomGeneratorTests
     public void Generate_SameSeeds_ProduceSameResult()
     {
         var config = CreateBigRoomConfig(60, 40);
-        var generator = new BigRoomGenerator();
+        _ = new BigRoomGenerator();
 
-        var result1 = generator.Generate(config, new Random(42));
-        var result2 = generator.Generate(config, new Random(42));
+        var result1 = BigRoomGenerator.Generate(config, new Random(42));
+        var result2 = BigRoomGenerator.Generate(config, new Random(42));
 
         Assert.Equal(result1.StairsPosition, result2.StairsPosition);
         Assert.Equal(result1.Room, result2.Room);

@@ -1,4 +1,4 @@
-namespace FF11Dungeon.MapGen;
+namespace MapViewer.MapGen;
 
 /// <summary>
 /// BSP (Binary Space Partitioning) による自由配置型のRoom生成と、
@@ -16,7 +16,7 @@ public sealed class RoomGenerator
     /// <param name="grid">書き込み先のMapGrid</param>
     /// <param name="rng">乱数生成器</param>
     /// <returns>生成されたRoomとメタデータのリスト</returns>
-    public RoomGenerationResult GenerateRoomsBSP(
+    public static RoomGenerationResult GenerateRoomsBSP(
         GenerationConfig config,
         MapGrid grid,
         Random rng)
@@ -84,7 +84,7 @@ public sealed class RoomGenerator
     /// PartitionGridの各区画にRoomを生成し、MapGridへFloorタイルを書き込む。
     /// （従来方式 — 後方互換性のため維持）
     /// </summary>
-    public RoomGenerationResult GenerateRooms(
+    public static RoomGenerationResult GenerateRooms(
         PartitionGrid partitions,
         GenerationConfig config,
         MapGrid grid,
@@ -347,19 +347,11 @@ public sealed class RoomGenerator
     /// <summary>
     /// BSP分割に使用する内部リーフ構造体。
     /// </summary>
-    private sealed class BspLeaf
+    private sealed class BspLeaf(int x, int y, int width, int height)
     {
-        public int X { get; }
-        public int Y { get; }
-        public int Width { get; }
-        public int Height { get; }
-
-        public BspLeaf(int x, int y, int width, int height)
-        {
-            X = x;
-            Y = y;
-            Width = width;
-            Height = height;
-        }
+        public int X { get; } = x;
+        public int Y { get; } = y;
+        public int Width { get; } = width;
+        public int Height { get; } = height;
     }
 }

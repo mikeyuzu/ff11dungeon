@@ -1,4 +1,4 @@
-namespace FF11Dungeon.MapGen;
+namespace MapViewer.MapGen;
 
 public sealed class MonsterHouseAssigner
 {
@@ -6,7 +6,7 @@ public sealed class MonsterHouseAssigner
     /// MonsterHouseEnabled=true の場合、非隠しRoomに対してモンスターハウス判定を行い、
     /// 1～3部屋にMonsterHouseフラグと密度乗数を設定する。
     /// </summary>
-    public void AssignMonsterHouses(
+    public static void AssignMonsterHouses(
         IReadOnlyList<RoomMetadata> metadata,
         GenerationConfig config,
         Random rng)

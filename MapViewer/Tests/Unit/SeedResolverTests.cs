@@ -1,4 +1,6 @@
-namespace FF11Dungeon.MapGen.Tests.Unit;
+using MapViewer.MapGen;
+
+namespace MapViewer.Tests.Unit;
 
 /// <summary>
 /// SeedResolver のユニットテスト。

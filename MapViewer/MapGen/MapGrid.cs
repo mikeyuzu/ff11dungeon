@@ -1,19 +1,11 @@
-namespace FF11Dungeon.MapGen;
+namespace MapViewer.MapGen;
 
-public sealed class MapGrid
+public sealed class MapGrid(int width, int height)
 {
-    private readonly TileType[,] _tiles;
+    private readonly TileType[,] _tiles = new TileType[width, height];
 
-    public int Width { get; }
-    public int Height { get; }
-
-    public MapGrid(int width, int height)
-    {
-        Width = width;
-        Height = height;
-        _tiles = new TileType[width, height];
-        // 初期値: すべてWall (TileType.Wall = 0)
-    }
+    public int Width { get; } = width;
+    public int Height { get; } = height;
 
     public TileType this[int x, int y]
     {

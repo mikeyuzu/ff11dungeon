@@ -1,6 +1,6 @@
-using FF11Dungeon.MapGen;
+using MapViewer.MapGen;
 
-namespace FF11Dungeon.MapGen.Tests.Integration;
+namespace MapViewer.Tests.Integration;
 
 /// <summary>
 /// MapGenerator ファサードの統合テスト。
@@ -15,8 +15,8 @@ public class FullGenerationTests
     [Fact]
     public void Generate_DefaultConfig_Succeeds()
     {
-        var generator = new MapGenerator();
-        var result = generator.Generate(new GenerationConfig());
+        _ = new MapGenerator();
+        var result = MapGenerator.Generate(new GenerationConfig());
 
         Assert.True(result.Success);
         Assert.NotNull(result.Grid);
@@ -40,8 +40,8 @@ public class FullGenerationTests
             MapWidth = 60,
             MapHeight = 40,
         };
-        var generator = new MapGenerator();
-        var result = generator.Generate(config);
+        _ = new MapGenerator();
+        var result = MapGenerator.Generate(config);
 
         Assert.True(result.Success);
         Assert.NotNull(result.Grid);
@@ -67,8 +67,8 @@ public class FullGenerationTests
             GridColumns = 1,
             EmptyPartitionChance = 0.0f,
         };
-        var generator = new MapGenerator();
-        var result = generator.Generate(config);
+        _ = new MapGenerator();
+        var result = MapGenerator.Generate(config);
 
         Assert.False(result.Success);
         Assert.NotNull(result.FailureReason);
@@ -82,8 +82,8 @@ public class FullGenerationTests
     public void Generate_WithoutSeed_AutoGeneratesSeed()
     {
         var config = new GenerationConfig { Seed = null };
-        var generator = new MapGenerator();
-        var result = generator.Generate(config);
+        _ = new MapGenerator();
+        var result = MapGenerator.Generate(config);
 
         Assert.True(result.Success);
         // UsedSeed should be populated with auto-generated value
@@ -99,9 +99,9 @@ public class FullGenerationTests
     public void Generate_SameSeed_ProducesSameResult()
     {
         var config = new GenerationConfig { Seed = 42 };
-        var generator = new MapGenerator();
-        var result1 = generator.Generate(config);
-        var result2 = generator.Generate(config);
+        _ = new MapGenerator();
+        var result1 = MapGenerator.Generate(config);
+        var result2 = MapGenerator.Generate(config);
 
         Assert.True(result1.Success);
         Assert.True(result2.Success);

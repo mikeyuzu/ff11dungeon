@@ -1,4 +1,4 @@
-namespace FF11Dungeon.MapGen;
+namespace MapViewer.MapGen;
 
 public sealed class SpawnPlacer
 {
@@ -7,7 +7,7 @@ public sealed class SpawnPlacer
     /// StairsDown、プレイヤースポーン、モンスタースポーンを配置し、結果を返す。
     /// 配置不能な場合は失敗結果を返し、再生成トリガーとする。
     /// </summary>
-    public SpawnResult PlaceSpawns(
+    public static SpawnResult PlaceSpawns(
         MapGrid grid,
         IReadOnlyList<Room> rooms,
         IReadOnlyList<RoomMetadata> metadata,

@@ -1,10 +1,10 @@
 using FsCheck;
 using FsCheck.Fluent;
 using FsCheck.Xunit;
-using FF11Dungeon.MapGen;
-using FF11Dungeon.MapGen.Tests.Generators;
+using MapViewer.MapGen;
+using MapViewer.Tests.Generators;
 
-namespace FF11Dungeon.MapGen.Tests.Properties;
+namespace MapViewer.Tests.Properties;
 
 /// <summary>
 /// マップ接続性に関するプロパティベーステスト。
@@ -40,14 +40,14 @@ public class ConnectivityProperties
                 }.Clamp();
 
                 var loop = new RegenerationLoop();
-                var result = loop.Execute(testConfig);
+                var result = RegenerationLoop.Execute(testConfig);
 
                 if (!result.Success)
                     return true.Label("Generation failed (expected in edge cases) - skipped");
 
                 // Verify connectivity using ConnectivityValidator
                 var validator = new ConnectivityValidator();
-                bool isConnected = validator.Validate(result.Grid!, result.Rooms!, result.PlayerSpawn!.Value);
+                bool isConnected = ConnectivityValidator.Validate(result.Grid!, result.Rooms!, result.PlayerSpawn!.Value);
 
                 return isConnected.Label("All non-hidden rooms must be reachable from player spawn");
             });

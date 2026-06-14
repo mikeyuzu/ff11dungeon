@@ -1,9 +1,9 @@
 using FsCheck;
 using FsCheck.Fluent;
 using FsCheck.Xunit;
-using FF11Dungeon.MapGen.Tests.Generators;
+using MapViewer.Tests.Generators;
 
-namespace FF11Dungeon.MapGen.Tests.Properties;
+namespace MapViewer.Tests.Properties;
 
 /// <summary>
 /// Property 10: パラメータクランプの正当性

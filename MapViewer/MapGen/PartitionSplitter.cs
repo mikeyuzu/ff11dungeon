@@ -1,4 +1,4 @@
-namespace FF11Dungeon.MapGen;
+namespace MapViewer.MapGen;
 
 /// <summary>
 /// マップ領域を rows×cols のグリッドに等分割する。
@@ -17,7 +17,7 @@ public sealed class PartitionSplitter
     /// <param name="rows">要求グリッド行数</param>
     /// <param name="cols">要求グリッド列数</param>
     /// <returns>分割結果の PartitionGrid</returns>
-    public PartitionGrid Split(int mapWidth, int mapHeight, int rows, int cols)
+    public static PartitionGrid Split(int mapWidth, int mapHeight, int rows, int cols)
     {
         // 1. 最小Partition幅を満たせるまで cols を削減
         cols = ReduceToFit(mapWidth, cols);

@@ -1,4 +1,6 @@
-namespace FF11Dungeon.MapGen.Tests.Unit;
+using MapViewer.MapGen;
+
+namespace MapViewer.Tests.Unit;
 
 /// <summary>
 /// ConnectivityValidator のユニットテスト。
@@ -23,7 +25,7 @@ public class ConnectivityValidatorTests
             new() { Room = new Room { X = 1, Y = 1, Width = 3, Height = 3 } }
         };
 
-        var result = _validator.Validate(grid, rooms, new Vector2Int(2, 2));
+        var result = ConnectivityValidator.Validate(grid, rooms, new Vector2Int(2, 2));
         Assert.True(result);
     }
 
@@ -53,7 +55,7 @@ public class ConnectivityValidatorTests
             new() { Room = new Room { X = 10, Y = 1, Width = 3, Height = 3 } }
         };
 
-        var result = _validator.Validate(grid, rooms, new Vector2Int(2, 2));
+        var result = ConnectivityValidator.Validate(grid, rooms, new Vector2Int(2, 2));
         Assert.True(result);
     }
 
@@ -79,7 +81,7 @@ public class ConnectivityValidatorTests
             new() { Room = new Room { X = 10, Y = 1, Width = 3, Height = 3 } }
         };
 
-        var result = _validator.Validate(grid, rooms, new Vector2Int(2, 2));
+        var result = ConnectivityValidator.Validate(grid, rooms, new Vector2Int(2, 2));
         Assert.False(result);
     }
 
@@ -105,7 +107,7 @@ public class ConnectivityValidatorTests
             new() { Room = new Room { X = 10, Y = 1, Width = 3, Height = 3 }, IsHiddenRoom = true }
         };
 
-        var result = _validator.Validate(grid, rooms, new Vector2Int(2, 2));
+        var result = ConnectivityValidator.Validate(grid, rooms, new Vector2Int(2, 2));
         Assert.True(result);
     }
 
@@ -131,7 +133,7 @@ public class ConnectivityValidatorTests
             new() { Room = new Room { X = 5, Y = 1, Width = 3, Height = 1 } }
         };
 
-        var result = _validator.Validate(grid, rooms, new Vector2Int(0, 1));
+        var result = ConnectivityValidator.Validate(grid, rooms, new Vector2Int(0, 1));
         Assert.True(result);
     }
 
@@ -155,7 +157,7 @@ public class ConnectivityValidatorTests
             new() { Room = new Room { X = 3, Y = 2, Width = 2, Height = 1 } }
         };
 
-        var result = _validator.Validate(grid, rooms, new Vector2Int(0, 2));
+        var result = ConnectivityValidator.Validate(grid, rooms, new Vector2Int(0, 2));
         Assert.False(result);
     }
 
@@ -168,7 +170,7 @@ public class ConnectivityValidatorTests
 
         var rooms = new List<RoomMetadata>();
 
-        var result = _validator.Validate(grid, rooms, new Vector2Int(2, 2));
+        var result = ConnectivityValidator.Validate(grid, rooms, new Vector2Int(2, 2));
         Assert.True(result);
     }
 
@@ -184,7 +186,7 @@ public class ConnectivityValidatorTests
             new() { Room = new Room { X = 0, Y = 0, Width = 1, Height = 1 }, IsHiddenRoom = true }
         };
 
-        var result = _validator.Validate(grid, rooms, new Vector2Int(2, 2));
+        var result = ConnectivityValidator.Validate(grid, rooms, new Vector2Int(2, 2));
         Assert.True(result);
     }
 }

@@ -1,4 +1,4 @@
-namespace FF11Dungeon.MapGen;
+namespace MapViewer.MapGen;
 
 /// <summary>
 /// 壁タイルの描画バリアントを表す列挙型。

@@ -1,4 +1,4 @@
-namespace FF11Dungeon.MapGen;
+namespace MapViewer.MapGen;
 
 /// <summary>
 /// 各Corridor-Room接続について、CorridorがRoom壁面を貫通する位置の
@@ -14,7 +14,7 @@ public sealed class EntranceMarker
     /// <param name="grid">書き込み先のMapGrid</param>
     /// <param name="rooms">生成済みのRoom一覧</param>
     /// <param name="corridors">生成済みのCorridor一覧</param>
-    public void MarkEntrances(
+    public static void MarkEntrances(
         MapGrid grid,
         IReadOnlyList<Room> rooms,
         IReadOnlyList<Corridor> corridors)

@@ -1,4 +1,6 @@
-namespace FF11Dungeon.MapGen.Tests.Unit;
+using MapViewer.MapGen;
+
+namespace MapViewer.Tests.Unit;
 
 /// <summary>
 /// RoomGenerator のユニットテスト。
@@ -45,7 +47,7 @@ public class RoomGeneratorTests
         var rng = new Random(42);
         var generator = new RoomGenerator();
 
-        var result = generator.GenerateRooms(grid, config, mapGrid, rng);
+        var result = RoomGenerator.GenerateRooms(grid, config, mapGrid, rng);
 
         // 各Partitionに最大1部屋
         var partitionRoomCounts = result.Rooms
@@ -72,9 +74,9 @@ public class RoomGeneratorTests
             EmptyPartitionChance = 0.0f,
         };
         var rng = new Random(123);
-        var generator = new RoomGenerator();
+        _ = new RoomGenerator();
 
-        var result = generator.GenerateRooms(grid, config, mapGrid, rng);
+        var result = RoomGenerator.GenerateRooms(grid, config, mapGrid, rng);
 
         foreach (var room in result.Rooms)
         {
@@ -98,9 +100,9 @@ public class RoomGeneratorTests
             EmptyPartitionChance = 0.0f,
         };
         var rng = new Random(99);
-        var generator = new RoomGenerator();
+        _ = new RoomGenerator();
 
-        var result = generator.GenerateRooms(grid, config, mapGrid, rng);
+        var result = RoomGenerator.GenerateRooms(grid, config, mapGrid, rng);
 
         foreach (var room in result.Rooms)
         {
@@ -128,9 +130,9 @@ public class RoomGeneratorTests
             EmptyPartitionChance = 0.0f,
         };
         var rng = new Random(77);
-        var generator = new RoomGenerator();
+        _ = new RoomGenerator();
 
-        var result = generator.GenerateRooms(grid, config, mapGrid, rng);
+        var result = RoomGenerator.GenerateRooms(grid, config, mapGrid, rng);
 
         foreach (var room in result.Rooms)
         {
@@ -164,9 +166,9 @@ public class RoomGeneratorTests
             EmptyPartitionChance = 1.0f, // Always empty
         };
         var rng = new Random(42);
-        var generator = new RoomGenerator();
+        _ = new RoomGenerator();
 
-        var result = generator.GenerateRooms(grid, config, mapGrid, rng);
+        var result = RoomGenerator.GenerateRooms(grid, config, mapGrid, rng);
 
         // Even with 100% empty chance, minimum 2 rooms guaranteed
         Assert.True(result.Rooms.Count >= 2);
@@ -186,9 +188,9 @@ public class RoomGeneratorTests
             EmptyPartitionChance = 0.0f,
         };
         var rng = new Random(42);
-        var generator = new RoomGenerator();
+        _ = new RoomGenerator();
 
-        var result = generator.GenerateRooms(grid, config, mapGrid, rng);
+        var result = RoomGenerator.GenerateRooms(grid, config, mapGrid, rng);
 
         Assert.Equal(9, result.Rooms.Count);
     }
@@ -202,7 +204,7 @@ public class RoomGeneratorTests
     {
         // 2x2 grid with high empty chance
         var grid = CreateSimpleGrid(2, 2, 20, 20);
-        var mapGrid = new MapGrid(40, 40);
+        _ = new MapGrid(40, 40);
         var config = new GenerationConfig
         {
             MinRoomWidth = 5,
@@ -216,9 +218,9 @@ public class RoomGeneratorTests
         for (int seed = 0; seed < 20; seed++)
         {
             var rng = new Random(seed);
-            var generator = new RoomGenerator();
+            _ = new RoomGenerator();
             var localGrid = new MapGrid(40, 40);
-            var result = generator.GenerateRooms(grid, config, localGrid, rng);
+            var result = RoomGenerator.GenerateRooms(grid, config, localGrid, rng);
             Assert.True(result.Rooms.Count >= 2, $"Seed {seed} produced {result.Rooms.Count} rooms");
         }
     }
@@ -241,9 +243,9 @@ public class RoomGeneratorTests
             EmptyPartitionChance = 0.0f,
         };
         var rng = new Random(42);
-        var generator = new RoomGenerator();
+        _ = new RoomGenerator();
 
-        var result = generator.GenerateRooms(grid, config, mapGrid, rng);
+        var result = RoomGenerator.GenerateRooms(grid, config, mapGrid, rng);
 
         Assert.Single(result.Rooms);
         var room = result.Rooms[0];
@@ -280,9 +282,9 @@ public class RoomGeneratorTests
             EmptyPartitionChance = 0.0f,
         };
         var rng = new Random(42);
-        var generator = new RoomGenerator();
+        _ = new RoomGenerator();
 
-        var result = generator.GenerateRooms(grid, config, mapGrid, rng);
+        var result = RoomGenerator.GenerateRooms(grid, config, mapGrid, rng);
 
         Assert.Equal(result.Rooms.Count, result.Metadata.Count);
         for (int i = 0; i < result.Rooms.Count; i++)

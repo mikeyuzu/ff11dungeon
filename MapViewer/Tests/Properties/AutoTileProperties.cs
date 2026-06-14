@@ -1,9 +1,9 @@
 using FsCheck;
 using FsCheck.Fluent;
 using FsCheck.Xunit;
-using FF11Dungeon.MapGen;
+using MapViewer.MapGen;
 
-namespace FF11Dungeon.MapGen.Tests.Properties;
+namespace MapViewer.Tests.Properties;
 
 /// <summary>
 /// AutoTileProcessor のプロパティベーステスト。
@@ -28,8 +28,8 @@ public class AutoTileProperties
 
                 foreach (var (x, y) in wallPositions)
                 {
-                    var variant1 = processor.DetermineVariant(grid, x, y);
-                    var variant2 = processor.DetermineVariant(grid, x, y);
+                    var variant1 = AutoTileProcessor.DetermineVariant(grid, x, y);
+                    var variant2 = AutoTileProcessor.DetermineVariant(grid, x, y);
 
                     if (variant1 != variant2)
                         return false.Label($"Non-deterministic at ({x},{y}): {variant1} vs {variant2}");
@@ -76,14 +76,14 @@ public class AutoTileProperties
                         if (grid.GetTileOrWall(x, y) != TileType.Wall)
                             continue;
 
-                        var variant = processor.DetermineVariant(grid, x, y);
+                        var variant = AutoTileProcessor.DetermineVariant(grid, x, y);
 
                         // Must return a defined enum value
                         if (!Enum.IsDefined(variant))
                             return false.Label($"Invalid variant at boundary ({x},{y}): {variant}");
 
                         // Verify determinism at boundary too
-                        var variant2 = processor.DetermineVariant(grid, x, y);
+                        var variant2 = AutoTileProcessor.DetermineVariant(grid, x, y);
                         if (variant != variant2)
                             return false.Label($"Non-deterministic at boundary ({x},{y}): {variant} vs {variant2}");
                     }

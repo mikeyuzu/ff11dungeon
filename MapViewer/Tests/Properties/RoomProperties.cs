@@ -1,10 +1,10 @@
 using FsCheck;
 using FsCheck.Fluent;
 using FsCheck.Xunit;
-using FF11Dungeon.MapGen;
-using FF11Dungeon.MapGen.Tests.Generators;
+using MapViewer.MapGen;
+using MapViewer.Tests.Generators;
 
-namespace FF11Dungeon.MapGen.Tests.Properties;
+namespace MapViewer.Tests.Properties;
 
 /// <summary>
 /// RoomGenerator のプロパティベーステスト。
@@ -60,11 +60,11 @@ public class RoomProperties
                 }.Clamp();
 
                 var splitter = new PartitionSplitter();
-                var partitions = splitter.Split(testConfig.MapWidth, testConfig.MapHeight, testConfig.GridRows, testConfig.GridColumns);
+                var partitions = PartitionSplitter.Split(testConfig.MapWidth, testConfig.MapHeight, testConfig.GridRows, testConfig.GridColumns);
                 var grid = new MapGrid(testConfig.MapWidth, testConfig.MapHeight);
                 var rng = new Random(seed);
                 var roomGen = new RoomGenerator();
-                var result = roomGen.GenerateRooms(partitions, testConfig, grid, rng);
+                var result = RoomGenerator.GenerateRooms(partitions, testConfig, grid, rng);
 
                 return (result.Rooms.Count >= 2)
                     .Label($"Expected >= 2 rooms, got {result.Rooms.Count} with EmptyPartitionChance={emptyChance}");

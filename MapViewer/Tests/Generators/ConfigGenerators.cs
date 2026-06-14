@@ -1,7 +1,8 @@
 using FsCheck;
 using FsCheck.Fluent;
+using MapViewer.MapGen;
 
-namespace FF11Dungeon.MapGen.Tests.Generators;
+namespace MapViewer.Tests.Generators;
 
 /// <summary>
 /// FsCheck カスタムジェネレーター: GenerationConfig 用

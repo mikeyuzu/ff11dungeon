@@ -1,7 +1,7 @@
-namespace FF11Dungeon.MapGen;
+namespace MapViewer.MapGen;
 
 public sealed class RoomGenerationResult
 {
-    public IReadOnlyList<Room> Rooms { get; init; } = Array.Empty<Room>();
-    public IReadOnlyList<RoomMetadata> Metadata { get; init; } = Array.Empty<RoomMetadata>();
+    public IReadOnlyList<Room> Rooms { get; init; } = [];
+    public IReadOnlyList<RoomMetadata> Metadata { get; init; } = [];
 }

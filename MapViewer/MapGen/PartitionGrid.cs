@@ -1,18 +1,11 @@
-namespace FF11Dungeon.MapGen;
+namespace MapViewer.MapGen;
 
-public sealed class PartitionGrid
+public sealed class PartitionGrid(Partition[,] partitions)
 {
-    private readonly Partition[,] _partitions;
+    private readonly Partition[,] _partitions = partitions;
 
-    public int Rows { get; }
-    public int Columns { get; }
-
-    public PartitionGrid(Partition[,] partitions)
-    {
-        Rows = partitions.GetLength(0);
-        Columns = partitions.GetLength(1);
-        _partitions = partitions;
-    }
+    public int Rows { get; } = partitions.GetLength(0);
+    public int Columns { get; } = partitions.GetLength(1);
 
     public Partition this[int row, int col] => _partitions[row, col];
 

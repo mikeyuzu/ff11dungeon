@@ -1,4 +1,4 @@
-namespace FF11Dungeon.MapGen;
+namespace MapViewer.MapGen;
 
 /// <summary>
 /// 指定位置のWallタイルに対し、周囲8タイルを検査して壁バリアントを決定する。
@@ -15,7 +15,7 @@ public sealed class AutoTileProcessor
     /// <param name="x">X座標</param>
     /// <param name="y">Y座標</param>
     /// <returns>決定されたWallVariant</returns>
-    public WallVariant DetermineVariant(MapGrid grid, int x, int y)
+    public static WallVariant DetermineVariant(MapGrid grid, int x, int y)
     {
         // 対象タイルがWallでない場合はNoneを返す
         if (grid.GetTileOrWall(x, y) != TileType.Wall)

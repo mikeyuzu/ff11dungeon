@@ -1,6 +1,6 @@
-namespace FF11Dungeon.MapGen;
+namespace MapViewer.MapGen;
 
 public sealed class CorridorResult
 {
-    public IReadOnlyList<Corridor> Corridors { get; init; } = Array.Empty<Corridor>();
+    public IReadOnlyList<Corridor> Corridors { get; init; } = [];
 }

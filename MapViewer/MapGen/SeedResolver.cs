@@ -1,4 +1,4 @@
-namespace FF11Dungeon.MapGen;
+namespace MapViewer.MapGen;
 
 /// <summary>
 /// シード値の解決と決定論的な Random インスタンスの生成を行うヘルパー。

@@ -1,5 +1,5 @@
 using System.Numerics;
-using FF11Dungeon.MapGen;
+using MapViewer.MapGen;
 using Silk.NET.Input;
 using Silk.NET.Maths;
 using Silk.NET.OpenGL;
@@ -62,7 +62,7 @@ window.Run();
 GenerationResult GenerateMap(GenerationConfig cfg)
 {
     var generator = new MapGenerator();
-    var result = generator.Generate(cfg);
+    var result = MapGenerator.Generate(cfg);
 
     if (!result.Success)
     {
@@ -75,7 +75,7 @@ GenerationResult GenerateMap(GenerationConfig cfg)
             MapHeight = cfg.MapHeight,
             Seed = (uint)Random.Shared.Next(),
         };
-        result = generator.Generate(cfg);
+        result = MapGenerator.Generate(cfg);
     }
 
     Console.WriteLine($"Seed: {result.UsedSeed}, Rooms: {result.Rooms?.Count ?? 0}");

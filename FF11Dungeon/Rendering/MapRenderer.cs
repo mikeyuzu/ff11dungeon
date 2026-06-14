@@ -1,6 +1,6 @@
 using System.Numerics;
 using Silk.NET.OpenGL;
-using FF11Dungeon.MapGen;
+using MapViewer.MapGen;
 
 namespace FF11Dungeon.Rendering;
 
@@ -14,8 +14,8 @@ public sealed class MapRenderer : IDisposable
     private readonly float _tileSize;
 
     // メッシュデータ
-    private float[] _vertices = Array.Empty<float>();
-    private uint[] _indices = Array.Empty<uint>();
+    private float[] _vertices = [];
+    private uint[] _indices = [];
 
     // OpenGLバッファハンドル
     private uint _vao;
@@ -25,7 +25,7 @@ public sealed class MapRenderer : IDisposable
     private int _indexCount;
 
     // Room_Entrance位置リスト（トリガーコライダー配置用）
-    private readonly List<Vector3> _entranceTriggerPositions = new();
+    private readonly List<Vector3> _entranceTriggerPositions = [];
 
     /// <summary>
     /// Room_Entranceタイルのワールド座標リスト。
@@ -108,8 +108,8 @@ public sealed class MapRenderer : IDisposable
             }
         }
 
-        _vertices = vertices.ToArray();
-        _indices = indices.ToArray();
+        _vertices = [.. vertices];
+        _indices = [.. indices];
         _indexCount = _indices.Length;
 
         UploadMeshToGPU();
@@ -321,7 +321,7 @@ void main()
 
         // キューブの8頂点 (position + color)
         float[] cubeVertices =
-        {
+        [
             // Front face (Z+)
             cx - halfSize, cy - halfSize, cz + halfSize, r, g, b,
             cx + halfSize, cy - halfSize, cz + halfSize, r, g, b,
@@ -352,13 +352,13 @@ void main()
             cx - halfSize, cy - halfSize, cz + halfSize, r * 0.8f, g * 0.8f, b * 0.8f,
             cx - halfSize, cy + halfSize, cz + halfSize, r * 0.8f, g * 0.8f, b * 0.8f,
             cx - halfSize, cy + halfSize, cz - halfSize, r * 0.8f, g * 0.8f, b * 0.8f,
-        };
+        ];
 
         vertices.AddRange(cubeVertices);
 
         // 6面 × 2三角形 = 12三角形 × 3頂点 = 36インデックス
         uint[] cubeIndices =
-        {
+        [
             // Front
             offset + 0, offset + 1, offset + 2,
             offset + 0, offset + 2, offset + 3,
@@ -377,7 +377,7 @@ void main()
             // Left
             offset + 20, offset + 21, offset + 22,
             offset + 20, offset + 22, offset + 23,
-        };
+        ];
 
         indices.AddRange(cubeIndices);
         return offset + 24; // 24頂点追加
@@ -394,20 +394,20 @@ void main()
 
         // Y=0の水平クワッド (4頂点)
         float[] quadVertices =
-        {
+        [
             worldX,             0f, worldZ,             r, g, b,
             worldX + _tileSize, 0f, worldZ,             r, g, b,
             worldX + _tileSize, 0f, worldZ + _tileSize, r, g, b,
             worldX,             0f, worldZ + _tileSize, r, g, b,
-        };
+        ];
 
         vertices.AddRange(quadVertices);
 
         uint[] quadIndices =
-        {
+        [
             offset + 0, offset + 1, offset + 2,
             offset + 0, offset + 2, offset + 3,
-        };
+        ];
 
         indices.AddRange(quadIndices);
         return offset + 4; // 4頂点追加
@@ -436,7 +436,7 @@ void main()
 
             // 各ステップを小さなボックスとして描画（上面のみ簡略化）
             float[] stepVertices =
-            {
+            [
                 // Top face of step
                 worldX,             stepTop, sz,
                 r, g, b,
@@ -455,19 +455,19 @@ void main()
                 r * 0.7f, g * 0.7f, b * 0.7f,
                 worldX,             stepTop, sz,
                 r * 0.7f, g * 0.7f, b * 0.7f,
-            };
+            ];
 
             vertices.AddRange(stepVertices);
 
             uint[] stepIndices =
-            {
+            [
                 // Top
                 currentOffset + 0, currentOffset + 1, currentOffset + 2,
                 currentOffset + 0, currentOffset + 2, currentOffset + 3,
                 // Front
                 currentOffset + 4, currentOffset + 5, currentOffset + 6,
                 currentOffset + 4, currentOffset + 6, currentOffset + 7,
-            };
+            ];
 
             indices.AddRange(stepIndices);
             currentOffset += 8; // 8頂点 per step

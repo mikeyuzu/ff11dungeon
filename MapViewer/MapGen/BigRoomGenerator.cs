@@ -1,4 +1,4 @@
-namespace FF11Dungeon.MapGen;
+namespace MapViewer.MapGen;
 
 /// <summary>
 /// BigRoomMode=true 時に使用される生成器。
@@ -11,7 +11,7 @@ public sealed class BigRoomGenerator
     /// BigRoomMode=true時: 区画分割をスキップし、1タイル壁ボーダーを除く
     /// マップ全域に単一Roomを生成する。
     /// </summary>
-    public BigRoomResult Generate(GenerationConfig config, Random rng)
+    public static BigRoomResult Generate(GenerationConfig config, Random rng)
     {
         var grid = new MapGrid(config.MapWidth, config.MapHeight);
 

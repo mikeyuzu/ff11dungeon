@@ -1,10 +1,10 @@
 using FsCheck;
 using FsCheck.Fluent;
 using FsCheck.Xunit;
-using FF11Dungeon.MapGen;
-using FF11Dungeon.MapGen.Tests.Generators;
+using MapViewer.MapGen;
+using MapViewer.Tests.Generators;
 
-namespace FF11Dungeon.MapGen.Tests.Properties;
+namespace MapViewer.Tests.Properties;
 
 /// <summary>
 /// タイルタイプ整合性のプロパティベーステスト。
@@ -40,17 +40,17 @@ public class TileIntegrityProperties
                 }.Clamp();
 
                 var splitter = new PartitionSplitter();
-                var partitions = splitter.Split(clamped.MapWidth, clamped.MapHeight, clamped.GridRows, clamped.GridColumns);
+                var partitions = PartitionSplitter.Split(clamped.MapWidth, clamped.MapHeight, clamped.GridRows, clamped.GridColumns);
                 var grid = new MapGrid(clamped.MapWidth, clamped.MapHeight);
                 var rng = new Random(seed);
                 var roomGen = new RoomGenerator();
-                var roomResult = roomGen.GenerateRooms(partitions, clamped, grid, rng);
+                var roomResult = RoomGenerator.GenerateRooms(partitions, clamped, grid, rng);
 
                 var connector = new CorridorConnector();
-                var corridorResult = connector.Connect(partitions, roomResult.Rooms, roomResult.Metadata, clamped, grid, rng);
+                var corridorResult = CorridorConnector.Connect(partitions, roomResult.Rooms, roomResult.Metadata, clamped, grid, rng);
 
                 var marker = new EntranceMarker();
-                marker.MarkEntrances(grid, roomResult.Rooms, corridorResult.Corridors);
+                EntranceMarker.MarkEntrances(grid, roomResult.Rooms, corridorResult.Corridors);
 
                 // Check 1: Grid dimensions match config
                 if (grid.Width != clamped.MapWidth || grid.Height != clamped.MapHeight)

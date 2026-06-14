@@ -1,4 +1,4 @@
-namespace FF11Dungeon.MapGen;
+namespace MapViewer.MapGen;
 
 /// <summary>
 /// プレイヤースポーン地点からBFSを行い、すべての非隠しRoomへの到達性を検証する。
@@ -12,7 +12,7 @@ public sealed class ConnectivityValidator
     /// <param name="rooms">Room一覧（隠しRoomを含む）</param>
     /// <param name="startTile">BFS開始地点（プレイヤースポーン位置のFloorタイル）</param>
     /// <returns>すべての非隠しRoomに到達可能であればtrue</returns>
-    public bool Validate(MapGrid grid, IReadOnlyList<RoomMetadata> rooms, Vector2Int startTile)
+    public static bool Validate(MapGrid grid, IReadOnlyList<RoomMetadata> rooms, Vector2Int startTile)
     {
         var visited = new HashSet<Vector2Int>();
         var queue = new Queue<Vector2Int>();

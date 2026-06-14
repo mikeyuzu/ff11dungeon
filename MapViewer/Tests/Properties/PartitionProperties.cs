@@ -1,10 +1,10 @@
 using FsCheck;
 using FsCheck.Fluent;
 using FsCheck.Xunit;
-using FF11Dungeon.MapGen;
-using FF11Dungeon.MapGen.Tests.Generators;
+using MapViewer.MapGen;
+using MapViewer.Tests.Generators;
 
-namespace FF11Dungeon.MapGen.Tests.Properties;
+namespace MapViewer.Tests.Properties;
 
 /// <summary>
 /// PartitionSplitter のプロパティベーステスト。
@@ -25,7 +25,7 @@ public class PartitionProperties
             config =>
             {
                 var splitter = new PartitionSplitter();
-                var grid = splitter.Split(config.MapWidth, config.MapHeight, config.GridRows, config.GridColumns);
+                var grid = PartitionSplitter.Split(config.MapWidth, config.MapHeight, config.GridRows, config.GridColumns);
 
                 var partitions = grid.All.ToList();
 
@@ -70,7 +70,7 @@ public class PartitionProperties
             config =>
             {
                 var splitter = new PartitionSplitter();
-                var grid = splitter.Split(config.MapWidth, config.MapHeight, config.GridRows, config.GridColumns);
+                var grid = PartitionSplitter.Split(config.MapWidth, config.MapHeight, config.GridRows, config.GridColumns);
 
                 // Assert: ALL partitions have Width >= 9 AND Height >= 9
                 foreach (var partition in grid.All)

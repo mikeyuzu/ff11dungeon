@@ -1,4 +1,4 @@
-namespace FF11Dungeon.MapGen.Tests;
+namespace MapViewer.Tests;
 
 public class UnitTest1
 {

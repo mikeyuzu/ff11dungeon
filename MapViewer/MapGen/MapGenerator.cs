@@ -1,4 +1,4 @@
-namespace FF11Dungeon.MapGen;
+namespace MapViewer.MapGen;
 
 /// <summary>
 /// マップ生成のファサード。
@@ -11,7 +11,7 @@ public sealed class MapGenerator
     /// 指定された設定に基づきマップを生成する。
     /// パイプライン: Config検証→グリッド初期化→区画分割→部屋生成→通路接続→入口マーキング→スポーン配置→接続性検証
     /// </summary>
-    public GenerationResult Generate(GenerationConfig config)
+    public static GenerationResult Generate(GenerationConfig config)
     {
         var clamped = config.Clamp();
 
@@ -20,14 +20,14 @@ public sealed class MapGenerator
             return GenerateBigRoom(clamped);
         }
 
-        var loop = new RegenerationLoop();
-        var result = loop.Execute(clamped);
+        _ = new RegenerationLoop();
+        var result = RegenerationLoop.Execute(clamped);
 
         if (result.Success && clamped.MonsterHouseEnabled && result.Rooms != null)
         {
             var (_, rng) = SeedResolver.Resolve(result.UsedSeed + 1000);
-            var assigner = new MonsterHouseAssigner();
-            assigner.AssignMonsterHouses(result.Rooms, clamped, rng);
+            _ = new MonsterHouseAssigner();
+            MonsterHouseAssigner.AssignMonsterHouses(result.Rooms, clamped, rng);
         }
 
         return result;
@@ -36,8 +36,8 @@ public sealed class MapGenerator
     private static GenerationResult GenerateBigRoom(GenerationConfig config)
     {
         var (seed, rng) = SeedResolver.Resolve(config.Seed);
-        var generator = new BigRoomGenerator();
-        var bigResult = generator.Generate(config, rng);
+        _ = new BigRoomGenerator();
+        var bigResult = BigRoomGenerator.Generate(config, rng);
 
         // Player spawn in big room (random floor tile, not stairs)
         Vector2Int playerSpawn;

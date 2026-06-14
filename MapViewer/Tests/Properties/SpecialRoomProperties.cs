@@ -1,10 +1,10 @@
 using FsCheck;
 using FsCheck.Fluent;
 using FsCheck.Xunit;
-using FF11Dungeon.MapGen;
-using FF11Dungeon.MapGen.Tests.Generators;
+using MapViewer.MapGen;
+using MapViewer.Tests.Generators;
 
-namespace FF11Dungeon.MapGen.Tests.Properties;
+namespace MapViewer.Tests.Properties;
 
 /// <summary>
 /// 特殊部屋（モンスターハウス等）に関するプロパティベーステスト。
@@ -42,19 +42,19 @@ public class SpecialRoomProperties
                 }.Clamp();
 
                 var splitter = new PartitionSplitter();
-                var partitions = splitter.Split(clamped.MapWidth, clamped.MapHeight, clamped.GridRows, clamped.GridColumns);
+                var partitions = PartitionSplitter.Split(clamped.MapWidth, clamped.MapHeight, clamped.GridRows, clamped.GridColumns);
                 var grid = new MapGrid(clamped.MapWidth, clamped.MapHeight);
                 var rng = new Random(seed);
                 var roomGen = new RoomGenerator();
-                var roomResult = roomGen.GenerateRooms(partitions, clamped, grid, rng);
+                var roomResult = RoomGenerator.GenerateRooms(partitions, clamped, grid, rng);
 
                 // Generate corridors so IsHiddenRoom is set correctly
                 var connector = new CorridorConnector();
-                connector.Connect(partitions, roomResult.Rooms, roomResult.Metadata, clamped, grid, rng);
+                CorridorConnector.Connect(partitions, roomResult.Rooms, roomResult.Metadata, clamped, grid, rng);
 
                 // Assign monster houses
                 var assigner = new MonsterHouseAssigner();
-                assigner.AssignMonsterHouses(roomResult.Metadata, clamped, rng);
+                MonsterHouseAssigner.AssignMonsterHouses(roomResult.Metadata, clamped, rng);
 
                 // If there are no non-hidden rooms (all rooms are isolated),
                 // monster house assignment has no candidates - skip this case
