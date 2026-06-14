@@ -90,6 +90,11 @@ public class CharacterModel
     {
         [CharacterType.HumeMale] = new()
         {
+            [PartType.Face] = "Face/0000/tim     hm_hed11.tga",
+            [PartType.Body] = "Body/00000/tim     hm_ba1_1.tga",
+            [PartType.Hands] = "Hands/00000/tim     hm_ga1_1.tga",
+            [PartType.Legs] = "Legs/00000/tim     hm_la1_1.tga",
+            [PartType.Feet] = "Feet/00000/tim     hm_fa1_1.tga",
         },
         [CharacterType.HumeFemale] = new()
         {
@@ -99,30 +104,31 @@ public class CharacterModel
             [PartType.Legs] = "Legs/00000/tim     hf_la1_1.tga",
             [PartType.Feet] = "Feet/00000/tim     hf_fa1_1.tga",
         },
-        [CharacterType.ElvaanMale] = new()
-        {
-        },
-        [CharacterType.ElvaanFemale] = new()
-        {
-        },
-        [CharacterType.TarutaruMale] = new()
-        {
-        },
-        [CharacterType.TarutaruFemale] = new()
-        {
-        },
-        [CharacterType.Mithra] = new()
-        {
-        },
-        [CharacterType.Galka] = new()
-        {
-        },
+        [CharacterType.ElvaanMale] = [],
+        [CharacterType.ElvaanFemale] = [],
+        [CharacterType.TarutaruMale] = [],
+        [CharacterType.TarutaruFemale] = [],
+        [CharacterType.Mithra] = [],
+        [CharacterType.Galka] = [],
     };
 
     private static readonly Dictionary<CharacterType, Dictionary<string, (string upper, string lower, string waist)>> MotionPaths = new()
     {
         [CharacterType.HumeMale] = new()
         {
+            ["idle"]     = ("Motion/Base/idl0.fbx", "Motion/Base/idl1.fbx", "Motion/Base/idl2.fbx"),
+            ["walk"]     = ("Motion/Base/wlk0.fbx", "Motion/Base/wlk1.fbx", "Motion/Base/wlk2.fbx"),
+            ["run"]      = ("Motion/Base/run0.fbx", "Motion/Base/run1.fbx", "Motion/Base/run2.fbx"),
+            ["ability"]  = ("Motion/Base/cm00.fbx", "Motion/Base/cm01.fbx", "Motion/Base/cm02.fbx"),
+            ["item"]     = ("Motion/Base/mi20.fbx", "Motion/Base/mi21.fbx", "Motion/Base/mi22.fbx"),
+            ["throw"]    = ("Motion/Base/na30.fbx", "Motion/Base/na31.fbx", "Motion/Base/na32.fbx"),
+            ["bmagic"]   = ("Motion/Base/mb10.fbx", "Motion/Base/mb11.fbx", "Motion/Base/mb12.fbx"),
+            ["wmagic"]   = ("Motion/Base/mw10.fbx", "Motion/Base/mw11.fbx", "Motion/Base/mw12.fbx"),
+            ["ninjutsu"] = ("Motion/Base/mn10.fbx", "Motion/Base/mn11.fbx", "Motion/Base/mn12.fbx"),
+            ["summoner"] = ("Motion/Base/ms10.fbx", "Motion/Base/ms11.fbx", "Motion/Base/ms12.fbx"),
+            ["heal"]     = ("Motion/Base/rx10.fbx", "Motion/Base/rx11.fbx", "Motion/Base/rx12.fbx"),
+            ["death"]    = ("Motion/Base/ded0.fbx", "Motion/Base/ded1.fbx", "Motion/Base/ded2.fbx"),
+            ["reflesh"]  = ("Motion/Base/std0.fbx", "Motion/Base/std1.fbx", "Motion/Base/std2.fbx"),
         },
         [CharacterType.HumeFemale] = new()
         {
@@ -140,24 +146,12 @@ public class CharacterModel
             ["death"]    = ("Motion/Base/ded0.fbx", "Motion/Base/ded1.fbx", "Motion/Base/ded2.fbx"),
             ["reflesh"]  = ("Motion/Base/std0.fbx", "Motion/Base/std1.fbx", "Motion/Base/std2.fbx"),
         },
-        [CharacterType.ElvaanMale] = new()
-        {
-        },
-        [CharacterType.ElvaanFemale] = new()
-        {
-        },
-        [CharacterType.TarutaruMale] = new()
-        {
-        },
-        [CharacterType.TarutaruFemale] = new()
-        {
-        },
-        [CharacterType.Mithra] = new()
-        {
-        },
-        [CharacterType.Galka] = new()
-        {
-        },
+        [CharacterType.ElvaanMale] = [],
+        [CharacterType.ElvaanFemale] = [],
+        [CharacterType.TarutaruMale] = [],
+        [CharacterType.TarutaruFemale] = [],
+        [CharacterType.Mithra] = [],
+        [CharacterType.Galka] = [],
     };
 
     private static readonly Dictionary<int, string> WeaponMotionFolder = new()
@@ -194,32 +188,76 @@ public class CharacterModel
         [12] = false,
     };
 
-    private static readonly Dictionary<int, string[]> MainAttachBones = new()
+    private static readonly Dictionary<CharacterType, Dictionary<int, string[]>> MainAttachBones = new()
     {
-        [0] = ["bone0090"],
-        [1] = ["bone0093"],
-        [2] = ["bone0086"],
-        [3] = ["bone0090"],
-        [4] = ["bone0071"],
-        [5] = ["bone0095"],
-        [6] = ["bone0092"],
-        [7] = ["bone0092"],
-        [8] = ["bone0092"],
-        [9] = ["bone0083"],
-        [10] = ["bone0090"],
-        [11] = ["bone0095"],
-        [12] = ["bone0077"],
+        [CharacterType.HumeMale] = new()
+        {
+            [0] = [""],
+            [1] = ["bone0003"],
+            [2] = ["bone0009"],
+            [3] = ["bone0005"],
+            [4] = ["bone0017"],
+            [5] = ["bone0006"],
+            [6] = ["bone0015"],
+            [7] = ["bone0015"],
+            [8] = ["bone0015"],
+            [9] = ["bone0011"],
+            [10] = ["bone0008"],
+            [11] = ["bone0006"],
+            [12] = ["bone0015"],
+        },
+        [CharacterType.HumeFemale] = new()
+        {
+            [0] = [""],
+            [1] = ["bone0093"],
+            [2] = ["bone0086"],
+            [3] = ["bone0090"],
+            [4] = ["bone0071"],
+            [5] = ["bone0095"],
+            [6] = ["bone0092"],
+            [7] = ["bone0092"],
+            [8] = ["bone0092"],
+            [9] = ["bone0083"],
+            [10] = ["bone0090"],
+            [11] = ["bone0095"],
+            [12] = ["bone0077"],
+        },
+        [CharacterType.ElvaanMale] = [],
+        [CharacterType.ElvaanFemale] = [],
+        [CharacterType.TarutaruMale] = [],
+        [CharacterType.TarutaruFemale] = [],
+        [CharacterType.Mithra] = [],
+        [CharacterType.Galka] = [],
     };
 
-    private static readonly Dictionary<int, (string normal, string? dualWield)> SubAttachBones = new()
+    private static readonly Dictionary<CharacterType, Dictionary<int, (string normal, string? dualWield)>> SubAttachBones = new()
     {
-        [0] = ("bone0090", null),
-        [1] = ("bone0094", null),
-        [2] = ("bone0086", "bone0075"),
-        [3] = ("bone0090", "bone0075"),
-        [5] = ("bone0095", "bone0096"),
-        [9] = ("bone0083", "bone0084"),
-        [11] = ("bone0095", "bone0096"),
+        [CharacterType.HumeMale] = new()
+        {
+            [0] = ("", null),
+            [1] = ("bone0024", null),
+            [2] = ("bone0009", "bone0022"),
+            [3] = ("bone0005", "bone0019"),
+            [5] = ("bone0006", "bone0020"),
+            [9] = ("bone0011", "bone0023"),
+            [11] = ("bone0006", "bone0020"),
+        },
+        [CharacterType.HumeFemale] = new()
+        {
+            [0] = ("", null),
+            [1] = ("bone0094", null),
+            [2] = ("bone0086", "bone0075"),
+            [3] = ("bone0090", "bone0075"),
+            [5] = ("bone0095", "bone0096"),
+            [9] = ("bone0083", "bone0084"),
+            [11] = ("bone0095", "bone0096"),
+        },
+        [CharacterType.ElvaanMale] = [],
+        [CharacterType.ElvaanFemale] = [],
+        [CharacterType.TarutaruMale] = [],
+        [CharacterType.TarutaruFemale] = [],
+        [CharacterType.Mithra] = [],
+        [CharacterType.Galka] = [],
     };
 
     public static readonly Dictionary<int, string> WeaponCategories = new()
@@ -261,6 +299,10 @@ public class CharacterModel
         ["12001"] = "tim     hf_wand2.tga",
     };
 
+    /// <summary>
+    /// コンストラクタ - アセットマネージャを受け取って初期化する。アセットマネージャはモデルやテクスチャの読み込みに使用される。キャラクターデータの読み込みは行わないので、LoadAsync() を呼び出す必要がある
+    /// </summary>
+    /// <param name="assetManager"></param>
     public CharacterModel(AssetManager assetManager)
     {
         _assetManager = assetManager;
@@ -272,10 +314,14 @@ public class CharacterModel
         }
     }
 
+    /// <summary>
+    /// キャラクターデータの読み込み - モデル、テクスチャ、アニメーションを一括で読み込む
+    /// </summary>
+    /// <returns></returns>
     public async Task LoadAsync()
     {
         LoadBoneInfo();
-        var raceTexturePaths = TexturePaths.GetValueOrDefault(Enum.Parse<CharacterType>(_currentCharacter), new());
+        var raceTexturePaths = TexturePaths.GetValueOrDefault(Enum.Parse<CharacterType>(_currentCharacter), []);
         foreach (var (part, path) in raceTexturePaths)
         {
             var fullPath = $"{_basePlayerPath}/{_currentCharacter}/{path}";
@@ -299,7 +345,7 @@ public class CharacterModel
             }
             MergeBonesIntoSkeleton(model);
         }
-        var raceMotionPaths = MotionPaths.GetValueOrDefault(Enum.Parse<CharacterType>(_currentCharacter), new());
+        var raceMotionPaths = MotionPaths.GetValueOrDefault(Enum.Parse<CharacterType>(_currentCharacter), []);
         foreach (var (motionName, paths) in raceMotionPaths)
         {
             var upperClip = _assetManager.LoadFbx($"{_basePlayerPath}/{_currentCharacter}/{paths.upper}")?.Animations.FirstOrDefault();
@@ -313,6 +359,9 @@ public class CharacterModel
         await Task.CompletedTask;
     }
 
+    /// <summary>
+    /// bone_info.csv を読み込んで、上半身・下半身・腰のボーンを分類する
+    /// </summary>
     private void LoadBoneInfo()
     {
         var csvPath = Path.Combine(_assetManager.AssetBasePath, "Player", "Data", "bone_info.csv");
@@ -321,6 +370,9 @@ public class CharacterModel
             Console.WriteLine($"[CharacterModel] bone_info.csv not found");
             return;
         }
+        _upperBones.Clear();
+        _lowerBones.Clear();
+        _waistBones.Clear();
         var lines = File.ReadAllLines(csvPath);
         bool inTarget = false;
         foreach (var line in lines)
@@ -361,6 +413,10 @@ public class CharacterModel
         }
     }
 
+    /// <summary>
+    /// 最初に読み込んだモデルのボーン構造をスケルトンとして採用し、以降のモデルはスケルトンにないボーンのみ追加していく
+    /// </summary>
+    /// <param name="model"></param>
     private void BuildSkeleton(LoadedModel model)
     {
         _skeleton.Clear();
@@ -372,6 +428,10 @@ public class CharacterModel
         }
     }
 
+    /// <summary>
+    /// スケルトンにないボーンを以降のモデルから追加していく。これにより、全パーツで共通のスケルトンを構築する
+    /// </summary>
+    /// <param name="model"></param>
     private void MergeBonesIntoSkeleton(LoadedModel model)
     {
         foreach (var bone in model.Bones)
@@ -419,6 +479,12 @@ public class CharacterModel
         Console.WriteLine($"[CharacterModel] Battle motions loaded: {_animations.Count(a => a.Key.Contains('_'))} clips");
     }
 
+    /// <summary>
+    /// 上半身・下半身・腰のクリップをマージして、武器種ごとの戦闘モーションを作成する
+    /// </summary>
+    /// <param name="clipName"></param>
+    /// <param name="basePath"></param>
+    /// <param name="prefix"></param>
     private void LoadBattleClip(string clipName, string basePath, string prefix)
     {
         // base/内: 末尾0=upper, 末尾1=lower
@@ -438,6 +504,14 @@ public class CharacterModel
         }
     }
 
+    /// <summary>
+    /// 上半身・下半身・腰のクリップをマージして1つのクリップを作成する。各トラックのボーン名を元に、bone_info.csvで分類した上半身・下半身・腰のボーンに対応するトラックのみを抽出してマージする
+    /// </summary>
+    /// <param name="upper"></param>
+    /// <param name="lower"></param>
+    /// <param name="waist"></param>
+    /// <param name="name"></param>
+    /// <returns></returns>
     private AnimationClip MergeAnimationClips(AnimationClip? upper, AnimationClip? lower, AnimationClip? waist, string name)
     {
         var merged = new AnimationClip
@@ -490,12 +564,21 @@ public class CharacterModel
     public float MotionSpeed { get => _motionSpeed; set => _motionSpeed = value; }
     public bool DualWield => _dualWield;
 
+    /// <summary>
+    /// キャラクターデータの切り替え - モデル、テクスチャ、アニメーションをすべて切り替える。現在はロード済みのデータを切り替えるだけで、再読み込みは行わない
+    /// </summary>
+    /// <param name="name"></param>
     public void LoadCharacter(string name)
     {
         _currentCharacter = name;
+        using var _ = LoadAsync();
         Console.WriteLine($"[CharacterModel] LoadCharacter: {name}");
     }
 
+    /// <summary>
+    /// モーションの切り替え - 指定したモーションキーに対応するアニメーションクリップをアクティブにして再生する。現在はロード済みのクリップを切り替えるだけで、再読み込みは行わない
+    /// </summary>
+    /// <param name="motionKey"></param>
     public void PlayMotion(string motionKey)
     {
         _activeMotion = motionKey;
@@ -519,6 +602,10 @@ public class CharacterModel
     public void TogglePause() => _paused = !_paused;
     public void SetPaused(bool p) => _paused = p;
 
+    /// <summary>
+    /// フレーム単位でシークする。フレーム数は現在のアクティブクリップの長さから計算される。シーク後は一時停止状態になる
+    /// </summary>
+    /// <param name="frame"></param>
     public void SeekToFrame(int frame)
     {
         if (_activeClip == null || _totalFrames <= 0)
@@ -533,6 +620,9 @@ public class CharacterModel
         ApplySkinning();
     }
 
+    /// <summary>
+    /// 現在のフレームから1フレーム進める。フレーム数は現在のアクティブクリップの長さから計算される。シーク後は一時停止状態になる
+    /// </summary>
     public void StepForward()
     {
         if (_activeClip != null)
@@ -541,6 +631,9 @@ public class CharacterModel
         }
     }
 
+    /// <summary>
+    /// 現在のフレームから1フレーム戻す。フレーム数は現在のアクティブクリップの長さから計算される。シーク後は一時停止状態になる
+    /// </summary>
     public void StepBackward()
     {
         if (_activeClip != null)
@@ -549,14 +642,27 @@ public class CharacterModel
         }
     }
 
+    /// <summary>
+    /// 描画モードの切り替え - テクスチャあり、ワイヤーフレーム、法線表示、深度表示、ボーン表示を切り替える。ボーン表示はスケルトンを半透明で表示し、武器や装備は非表示にする
+    /// </summary>
+    /// <param name="mode"></param>
     public void SetRenderMode(RenderMode mode)
     {
         _renderMode = mode;
         _showBones = mode == RenderMode.Bone;
     }
 
+    /// <summary>
+    /// パーツの表示切り替え - 指定したパーツの表示・非表示を切り替える。非表示にしたパーツは描画されなくなるが、アニメーションやスケルトンには影響しない
+    /// </summary>
+    /// <param name="part"></param>
+    /// <param name="visible"></param>
     public void SetPartVisible(PartType part, bool visible) => _partVisible[part] = visible;
 
+    /// <summary>
+    /// 武器の装備 - 指定した武器を装備する。武器のカテゴリに応じて、対応するモデルとテクスチャを読み込んで装備する。二刀流可能な武器の場合は、サブにも同じ武器を装備する。二刀流不可能な武器の場合は、サブは空になる。装備する武器によって、戦闘モーションも切り替わる
+    /// </summary>
+    /// <param name="weapon"></param>
     public void EquipMainWeapon(WeaponInfo? weapon)
     {
         _mainWeapon = weapon;
@@ -594,6 +700,11 @@ public class CharacterModel
         }
     }
 
+    /// <summary>
+    /// 武器の装備 - 指定した武器をサブに装備する。主に二刀流用。武器のカテゴリに応じて、対応するモデルとテクスチャを読み込んで装備する。装備する武器によって、戦闘モーションも切り替わる
+    /// </summary>
+    /// <param name="hand"></param>
+    /// <param name="boneName"></param>
     public void SetAttachBone(string hand, string boneName)
     {
         if (hand == "right")
@@ -606,6 +717,10 @@ public class CharacterModel
         }
     }
 
+    /// <summary>
+    /// 二刀流の切り替え - 二刀流のオンオフを切り替える。二刀流をオンにすると、二刀流可能な武器はサブにも同じ武器を装備する。二刀流をオフにすると、サブの武器は外れる。二刀流の状態によって、戦闘モーションも切り替わる
+    /// </summary>
+    /// <param name="enabled"></param>
     public void SetDualWield(bool enabled)
     {
         _dualWield = enabled;
@@ -615,22 +730,60 @@ public class CharacterModel
         }
     }
 
+    /// <summary>
+    /// 武器カテゴリが両手武器かどうかを判定する。両手武器の場合は二刀流できないので、サブに装備できる武器はない。二刀流可能な武器の場合は、サブに同じ武器を装備する
+    /// </summary>
+    /// <param name="cat"></param>
+    /// <returns></returns>
     public static bool IsTwoHanded(int cat) => WeaponCategories.TryGetValue(cat, out var n) && n.StartsWith("両手");
+
+    /// <summary>
+    /// 武器カテゴリに対応する戦闘モーションのフォルダ名を取得する。フォルダ名がない場合はnullを返す
+    /// </summary>
+    /// <param name="cat"></param>
+    /// <returns></returns>
     public static string? GetWeaponMotionFolder(int cat) => WeaponMotionFolder.TryGetValue(cat, out var f) ? f : null;
-    public static string[]? GetMainAttachBones(int cat) => MainAttachBones.GetValueOrDefault(cat);
-    public static string[]? GetSubAttachBones(int cat, bool dw)
+
+    /// <summary>
+    /// 武器カテゴリに対応するメイン装備のボーン名を取得する。カテゴリがない場合はnullを返す
+    /// </summary>
+    /// <param name="cat"></param>
+    /// <returns></returns>
+    public string[]? GetMainAttachBones(int cat)
     {
-        if (!SubAttachBones.TryGetValue(cat, out var e)) return null;
+        var raceMainAttachBones = MainAttachBones.GetValueOrDefault(Enum.Parse<CharacterType>(_currentCharacter), []);
+        return raceMainAttachBones.GetValueOrDefault(cat);
+    }
+    /// <summary>
+    /// 武器カテゴリに対応するサブ装備のボーン名を取得する。二刀流可能な武器の場合は、通常と二刀流で異なるボーン名を返す。カテゴリがない場合はnullを返す
+    /// </summary>
+    /// <param name="cat"></param>
+    /// <param name="dw"></param>
+    /// <returns></returns>
+    public string[]? GetSubAttachBones(int cat, bool dw)
+    {
+        var raceSubAttachBones = SubAttachBones.GetValueOrDefault(Enum.Parse<CharacterType>(_currentCharacter), []);
+        if (!raceSubAttachBones.TryGetValue(cat, out var e)) return null;
         var bone = dw && e.dualWield != null ? e.dualWield : e.normal;
         return [bone];
     }
 
+    /// <summary>
+    /// 武器IDに対応するテクスチャを読み込む。テクスチャがない場合は0を返す
+    /// </summary>
+    /// <param name="slot"></param>
+    /// <param name="weaponId"></param>
+    /// <returns></returns>
     private uint LoadWeaponTexture(string slot, string weaponId)
     {
         if (!WeaponTextures.TryGetValue(weaponId, out var texName)) return 0;
         return _assetManager.LoadTexture($"Player/{_currentCharacter}/{slot}/{weaponId}/{texName}");
     }
 
+    /// <summary>
+    /// キャラクターのバウンディングボックスを取得する。モデルの原点を中心に、XZ平面に-0.3から0.3、Y方向に0から1.7の範囲を想定している。必要に応じて、装備やモーションに合わせて調整すること
+    /// </summary>
+    /// <returns></returns>
     public static BoundingBox GetBounds()
     {
         var bounds = BoundingBox.Empty;
@@ -639,10 +792,22 @@ public class CharacterModel
         return bounds;
     }
 
+    /// <summary>
+    /// キャラクターのスケルトンを取得する。スケルトンは最初に読み込んだモデルのボーン構造をベースに、以降のモデルからスケルトンにないボーンを追加して構築される。スケルトンは全パーツで共通で、アニメーションや描画に使用される
+    /// </summary>
+    /// <returns></returns>
     public List<BoneNode> GetAllBones() => _skeleton;
+
+    /// <summary>
+    /// キャラクターのボーンを名前で検索して取得する。大文字小文字を区別せず、コロンやパイプで区切られた場合は最後の部分を使用する。見つからない場合はnullを返す
+    /// </summary>
+    /// <returns></returns>
     public Dictionary<string, BoneNode> GetBoneByName() => _boneByName;
 
-    // ===== Update & Render =====
+    /// <summary>
+    /// アクティブなアニメーションクリップをフレーム単位で更新する。アニメーションが再生中の場合は、経過時間に応じて現在のフレームを計算して更新する。アニメーションがループする場合は、経過時間がクリップの長さを超えたら余りを使用してループさせる。更新後は、現在のフレームに対応するボーンの変換をスケルトンに適用する
+    /// </summary>
+    /// <param name="deltaTime"></param>
     public void Update(float deltaTime)
     {
         if (_activeClip != null && _activeClip.Duration > 0)
@@ -661,6 +826,11 @@ public class CharacterModel
         ApplySkinning();
     }
 
+    /// <summary>
+    /// キャラクターを描画する。描画モードやパーツの表示状態に応じて、モデルのメッシュをテクスチャ付きやワイヤーフレームで描画する。武器は装備している場合のみ描画する。ボーン表示モードの場合は、スケルトンを半透明で描画し、武器や装備は非表示にする
+    /// </summary>
+    /// <param name="renderer"></param>
+    /// <param name="camera"></param>
     public void Render(Renderer renderer, Camera camera)
     {
         bool wireframe = _renderMode == RenderMode.Wireframe;
@@ -693,14 +863,27 @@ public class CharacterModel
         }
     }
 
+    /// <summary>
+    /// 武器を描画する。装備している武器のモデルとテクスチャを使用して、指定した手のボーンに武器を装着して描画する。装着するボーンは、武器のカテゴリに応じて、あらかじめ定義されたボーン名から選択される。ボーン名のオーバーライドが設定されている場合は、そちらが優先される。装備している武器がない場合は描画しない
+    /// </summary>
+    /// <param name="renderer"></param>
+    /// <param name="camera"></param>
+    /// <param name="weaponModel"></param>
+    /// <param name="weapon"></param>
+    /// <param name="textureId"></param>
+    /// <param name="hand"></param>
+    /// <param name="opacity"></param>
+    /// <param name="wireframe"></param>
     private void DrawWeapon(Renderer renderer, Camera camera, LoadedModel? weaponModel, WeaponInfo? weapon, uint textureId, string hand, float opacity, bool wireframe)
     {
         if (weaponModel == null || weapon == null)
         {
             return;
         }
-        string? boneName = hand == "right" ? _attachBoneRightOverride ?? MainAttachBones.GetValueOrDefault(weapon.Category)?.FirstOrDefault()
-            : _attachBoneLeftOverride ?? (SubAttachBones.TryGetValue(weapon.Category, out var e) ? (_dualWield && e.dualWield != null ? e.dualWield : e.normal) : null);
+        var raceMainAttachBones = MainAttachBones.GetValueOrDefault(Enum.Parse<CharacterType>(_currentCharacter), []);
+        var raceSubAttachBones = SubAttachBones.GetValueOrDefault(Enum.Parse<CharacterType>(_currentCharacter), []);
+        string? boneName = hand == "right" ? _attachBoneRightOverride ?? raceMainAttachBones.GetValueOrDefault(weapon.Category)?.FirstOrDefault()
+            : _attachBoneLeftOverride ?? (raceSubAttachBones.TryGetValue(weapon.Category, out var e) ? (_dualWield && e.dualWield != null ? e.dualWield : e.normal) : null);
 
         Matrix4x4 attachMatrix = Matrix4x4.CreateScale(0.01f);
         if (boneName != null && _boneByName.TryGetValue(boneName.ToLower(), out var boneNode))
@@ -719,6 +902,11 @@ public class CharacterModel
         }
     }
 
+    /// <summary>
+    /// スケルトンを描画する。スケルトンの各ボーンを半透明の球で描画し、親子関係を線で結ぶ。ボーンの名前が "bone" で始まるもののみ描画する。描画モードがボーン表示の場合は、武器や装備は非表示にして、スケルトンのみを強調して表示する
+    /// </summary>
+    /// <param name="renderer"></param>
+    /// <param name="camera"></param>
     private void RenderBones(Renderer renderer, Camera camera)
     {
         var boneColor = new Vector4(0.27f, 0.67f, 1f, 0.85f);
@@ -739,6 +927,11 @@ public class CharacterModel
         }
     }
 
+    /// <summary>
+    /// アクティブなアニメーションクリップの現在のフレームに対応するボーンの変換をスケルトンに適用する。各トラックのボーン名を元に、スケルトンの対応するボーンを検索して、トラックの位置・回転・スケールを線形補間して適用する。見つからないボーンやトラックがない場合は、スケルトンの既存の変換を維持する
+    /// </summary>
+    /// <param name="clip"></param>
+    /// <param name="time"></param>
     private void ApplyAnimation(AnimationClip clip, float time)
     {
         foreach (var track in clip.Tracks)
@@ -766,6 +959,9 @@ public class CharacterModel
         UpdateWorldTransforms();
     }
 
+    /// <summary>
+    /// スケルトンの各ボーンのローカル変換を元に、ワールド変換を更新する。ワールド変換は、親ボーンのワールド変換とローカル変換を掛け合わせて計算される。親ボーンがいない場合は、ローカル変換がそのままワールド変換になる。スケルトンの全ボーンに対してこれを行うことで、アニメーションの結果がスケルトン全体に反映される
+    /// </summary>
     private void UpdateWorldTransforms()
     {
         foreach (var bone in _skeleton)
@@ -781,6 +977,9 @@ public class CharacterModel
         }
     }
 
+    /// <summary>
+    /// スケルトンのボーンのワールド変換を元に、モデルのメッシュの頂点をスキニングして変換する。各メッシュのボーンウェイトとボーンオフセットを使用して、頂点の位置と法線を変換する。変換後の頂点データをVBOにアップロードして、描画に反映させる。スキニングはCPUで行うため、頂点数が多い場合はパフォーマンスに注意すること
+    /// </summary>
     private void ApplySkinning()
     {
         var gl = _assetManager.GL;
@@ -872,6 +1071,13 @@ public class CharacterModel
         }
     }
 
+    /// <summary>
+    /// アニメーショントラックの位置・回転・スケールのキーを線形補間して、指定した時間の位置・回転・スケールを計算する。キーがない場合はデフォルト値を使用する。キーが1つだけの場合はその値を使用する。キーが複数ある場合は、時間に応じて前後のキーを見つけて線形補間する。時間が最後のキーを超える場合は最後のキーの値を使用する
+    /// </summary>
+    /// <param name="keys"></param>
+    /// <param name="time"></param>
+    /// <param name="def"></param>
+    /// <returns></returns>
     private static Vector3 Interpolate(List<VectorKey> keys, float time, Vector3 def)
     {
         if (keys.Count == 0)
@@ -893,6 +1099,12 @@ public class CharacterModel
         return keys[^1].Value;
     }
 
+    /// <summary>
+    /// アニメーショントラックの回転のキーを球面線形補間して、指定した時間の回転を計算する。キーがない場合はデフォルト値を使用する。キーが1つだけの場合はその値を使用する。キーが複数ある場合は、時間に応じて前後のキーを見つけて球面線形補間する。時間が最後のキーを超える場合は最後のキーの値を使用する
+    /// </summary>
+    /// <param name="keys"></param>
+    /// <param name="time"></param>
+    /// <returns></returns>
     private static Quaternion InterpolateRot(List<QuaternionKey> keys, float time)
     {
         if (keys.Count == 0)

@@ -1,0 +1,1444 @@
+NOESIS_MULTIFBX_FILE_VERSION 1
+
+SequenceEntry
+{
+	name		"cm00"
+	filename	"cm00.noefbxmulti - cm00.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"cm01"
+	filename	"cm00.noefbxmulti - cm01.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"cm10"
+	filename	"cm00.noefbxmulti - cm10.fbx"
+	framerate	"7.000000"
+}
+
+SequenceEntry
+{
+	name		"cm11"
+	filename	"cm00.noefbxmulti - cm11.fbx"
+	framerate	"7.000000"
+}
+
+SequenceEntry
+{
+	name		"mb00"
+	filename	"cm00.noefbxmulti - mb00.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"mb01"
+	filename	"cm00.noefbxmulti - mb01.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"mb10"
+	filename	"cm00.noefbxmulti - mb10.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"mb11"
+	filename	"cm00.noefbxmulti - mb11.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"mb20"
+	filename	"cm00.noefbxmulti - mb20.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mb21"
+	filename	"cm00.noefbxmulti - mb21.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mi00"
+	filename	"cm00.noefbxmulti - mi00.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mi01"
+	filename	"cm00.noefbxmulti - mi01.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mi10"
+	filename	"cm00.noefbxmulti - mi10.fbx"
+	framerate	"9.000000"
+}
+
+SequenceEntry
+{
+	name		"mi11"
+	filename	"cm00.noefbxmulti - mi11.fbx"
+	framerate	"7.000000"
+}
+
+SequenceEntry
+{
+	name		"mi20"
+	filename	"cm00.noefbxmulti - mi20.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mi21"
+	filename	"cm00.noefbxmulti - mi21.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mi30"
+	filename	"cm00.noefbxmulti - mi30.fbx"
+	framerate	"9.000000"
+}
+
+SequenceEntry
+{
+	name		"mi31"
+	filename	"cm00.noefbxmulti - mi31.fbx"
+	framerate	"7.000000"
+}
+
+SequenceEntry
+{
+	name		"mw00"
+	filename	"cm00.noefbxmulti - mw00.fbx"
+	framerate	"9.000000"
+}
+
+SequenceEntry
+{
+	name		"mw01"
+	filename	"cm00.noefbxmulti - mw01.fbx"
+	framerate	"9.000000"
+}
+
+SequenceEntry
+{
+	name		"mw10"
+	filename	"cm00.noefbxmulti - mw10.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mw11"
+	filename	"cm00.noefbxmulti - mw11.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mw20"
+	filename	"cm00.noefbxmulti - mw20.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mw21"
+	filename	"cm00.noefbxmulti - mw21.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"wlk0"
+	filename	"cm00.noefbxmulti - wlk0.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"ded0"
+	filename	"cm00.noefbxmulti - ded0.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"idl0"
+	filename	"cm00.noefbxmulti - idl0.fbx"
+	framerate	"7.000000"
+}
+
+SequenceEntry
+{
+	name		"mvb0"
+	filename	"cm00.noefbxmulti - mvb0.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mvl0"
+	filename	"cm00.noefbxmulti - mvl0.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mvr0"
+	filename	"cm00.noefbxmulti - mvr0.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"run0"
+	filename	"cm00.noefbxmulti - run0.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"rx00"
+	filename	"cm00.noefbxmulti - rx00.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"rx10"
+	filename	"cm00.noefbxmulti - rx10.fbx"
+	framerate	"7.000000"
+}
+
+SequenceEntry
+{
+	name		"rx20"
+	filename	"cm00.noefbxmulti - rx20.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"std0"
+	filename	"cm00.noefbxmulti - std0.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"cor0"
+	filename	"cm00.noefbxmulti - cor0.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"mou4"
+	filename	"cm00.noefbxmulti - mou4.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"eye3"
+	filename	"cm00.noefbxmulti - eye3.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"bb00"
+	filename	"cm00.noefbxmulti - bb00.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"bb10"
+	filename	"cm00.noefbxmulti - bb10.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"bf00"
+	filename	"cm00.noefbxmulti - bf00.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"bf10"
+	filename	"cm00.noefbxmulti - bf10.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"bb01"
+	filename	"cm00.noefbxmulti - bb01.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"bb11"
+	filename	"cm00.noefbxmulti - bb11.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"bf01"
+	filename	"cm00.noefbxmulti - bf01.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"bf11"
+	filename	"cm00.noefbxmulti - bf11.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"cor1"
+	filename	"cm00.noefbxmulti - cor1.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"dbm1"
+	filename	"cm00.noefbxmulti - dbm1.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"ded1"
+	filename	"cm00.noefbxmulti - ded1.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"dfm1"
+	filename	"cm00.noefbxmulti - dfm1.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"ri01"
+	filename	"cm00.noefbxmulti - ri01.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"rx01"
+	filename	"cm00.noefbxmulti - rx01.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"rx11"
+	filename	"cm00.noefbxmulti - rx11.fbx"
+	framerate	"7.000000"
+}
+
+SequenceEntry
+{
+	name		"rx21"
+	filename	"cm00.noefbxmulti - rx21.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"std1"
+	filename	"cm00.noefbxmulti - std1.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"ri00"
+	filename	"cm00.noefbxmulti - ri00.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"yu20"
+	filename	"cm00.noefbxmulti - yu20.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"gu01"
+	filename	"cm00.noefbxmulti - gu01.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gu10"
+	filename	"cm00.noefbxmulti - gu10.fbx"
+	framerate	"10.000000"
+}
+
+SequenceEntry
+{
+	name		"gu11"
+	filename	"cm00.noefbxmulti - gu11.fbx"
+	framerate	"10.000000"
+}
+
+SequenceEntry
+{
+	name		"gu20"
+	filename	"cm00.noefbxmulti - gu20.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"gu21"
+	filename	"cm00.noefbxmulti - gu21.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"na00"
+	filename	"cm00.noefbxmulti - na00.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"na01"
+	filename	"cm00.noefbxmulti - na01.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"na10"
+	filename	"cm00.noefbxmulti - na10.fbx"
+	framerate	"10.000000"
+}
+
+SequenceEntry
+{
+	name		"na11"
+	filename	"cm00.noefbxmulti - na11.fbx"
+	framerate	"10.000000"
+}
+
+SequenceEntry
+{
+	name		"na20"
+	filename	"cm00.noefbxmulti - na20.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"na21"
+	filename	"cm00.noefbxmulti - na21.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"yu00"
+	filename	"cm00.noefbxmulti - yu00.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"yu01"
+	filename	"cm00.noefbxmulti - yu01.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"yu10"
+	filename	"cm00.noefbxmulti - yu10.fbx"
+	framerate	"10.000000"
+}
+
+SequenceEntry
+{
+	name		"yu11"
+	filename	"cm00.noefbxmulti - yu11.fbx"
+	framerate	"10.000000"
+}
+
+SequenceEntry
+{
+	name		"gu00"
+	filename	"cm00.noefbxmulti - gu00.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"yu21"
+	filename	"cm00.noefbxmulti - yu21.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"sh00"
+	filename	"cm00.noefbxmulti - sh00.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"sf11"
+	filename	"cm00.noefbxmulti - sf11.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"sh20"
+	filename	"cm00.noefbxmulti - sh20.fbx"
+	framerate	"9.000000"
+}
+
+SequenceEntry
+{
+	name		"sh21"
+	filename	"cm00.noefbxmulti - sh21.fbx"
+	framerate	"9.000000"
+}
+
+SequenceEntry
+{
+	name		"sf20"
+	filename	"cm00.noefbxmulti - sf20.fbx"
+	framerate	"11.000000"
+}
+
+SequenceEntry
+{
+	name		"sf21"
+	filename	"cm00.noefbxmulti - sf21.fbx"
+	framerate	"11.000000"
+}
+
+SequenceEntry
+{
+	name		"sf10"
+	filename	"cm00.noefbxmulti - sf10.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"sh01"
+	filename	"cm00.noefbxmulti - sh01.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"sf00"
+	filename	"cm00.noefbxmulti - sf00.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"sf01"
+	filename	"cm00.noefbxmulti - sf01.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"sh10"
+	filename	"cm00.noefbxmulti - sh10.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"sh11"
+	filename	"cm00.noefbxmulti - sh11.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"sk10"
+	filename	"cm00.noefbxmulti - sk10.fbx"
+	framerate	"10.000000"
+}
+
+SequenceEntry
+{
+	name		"sk11"
+	filename	"cm00.noefbxmulti - sk11.fbx"
+	framerate	"10.000000"
+}
+
+SequenceEntry
+{
+	name		"sk20"
+	filename	"cm00.noefbxmulti - sk20.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"sk21"
+	filename	"cm00.noefbxmulti - sk21.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"na31"
+	filename	"cm00.noefbxmulti - na31.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"na30"
+	filename	"cm00.noefbxmulti - na30.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"mn10"
+	filename	"cm00.noefbxmulti - mn10.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"mn01"
+	filename	"cm00.noefbxmulti - mn01.fbx"
+	framerate	"6.000000"
+}
+
+SequenceEntry
+{
+	name		"mn00"
+	filename	"cm00.noefbxmulti - mn00.fbx"
+	framerate	"6.000000"
+}
+
+SequenceEntry
+{
+	name		"mn11"
+	filename	"cm00.noefbxmulti - mn11.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"mn20"
+	filename	"cm00.noefbxmulti - mn20.fbx"
+	framerate	"9.000000"
+}
+
+SequenceEntry
+{
+	name		"mn21"
+	filename	"cm00.noefbxmulti - mn21.fbx"
+	framerate	"9.000000"
+}
+
+SequenceEntry
+{
+	name		"ms20"
+	filename	"cm00.noefbxmulti - ms20.fbx"
+	framerate	"6.000000"
+}
+
+SequenceEntry
+{
+	name		"ms01"
+	filename	"cm00.noefbxmulti - ms01.fbx"
+	framerate	"6.000000"
+}
+
+SequenceEntry
+{
+	name		"ms10"
+	filename	"cm00.noefbxmulti - ms10.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"ms11"
+	filename	"cm00.noefbxmulti - ms11.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"ms00"
+	filename	"cm00.noefbxmulti - ms00.fbx"
+	framerate	"6.000000"
+}
+
+SequenceEntry
+{
+	name		"ms21"
+	filename	"cm00.noefbxmulti - ms21.fbx"
+	framerate	"6.000000"
+}
+
+SequenceEntry
+{
+	name		"si11"
+	filename	"cm00.noefbxmulti - si11.fbx"
+	framerate	"6.000000"
+}
+
+SequenceEntry
+{
+	name		"si01"
+	filename	"cm00.noefbxmulti - si01.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"si21"
+	filename	"cm00.noefbxmulti - si21.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"si10"
+	filename	"cm00.noefbxmulti - si10.fbx"
+	framerate	"6.000000"
+}
+
+SequenceEntry
+{
+	name		"si00"
+	filename	"cm00.noefbxmulti - si00.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"si20"
+	filename	"cm00.noefbxmulti - si20.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"ma11"
+	filename	"cm00.noefbxmulti - ma11.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"ma01"
+	filename	"cm00.noefbxmulti - ma01.fbx"
+	framerate	"12.000000"
+}
+
+SequenceEntry
+{
+	name		"ma10"
+	filename	"cm00.noefbxmulti - ma10.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"ma00"
+	filename	"cm00.noefbxmulti - ma00.fbx"
+	framerate	"12.000000"
+}
+
+SequenceEntry
+{
+	name		"ma20"
+	filename	"cm00.noefbxmulti - ma20.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"ma21"
+	filename	"cm00.noefbxmulti - ma21.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gc20"
+	filename	"cm00.noefbxmulti - gc20.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gc21"
+	filename	"cm00.noefbxmulti - gc21.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gc00"
+	filename	"cm00.noefbxmulti - gc00.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gc01"
+	filename	"cm00.noefbxmulti - gc01.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gc10"
+	filename	"cm00.noefbxmulti - gc10.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gc11"
+	filename	"cm00.noefbxmulti - gc11.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gh00"
+	filename	"cm00.noefbxmulti - gh00.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gh01"
+	filename	"cm00.noefbxmulti - gh01.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gh10"
+	filename	"cm00.noefbxmulti - gh10.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gh11"
+	filename	"cm00.noefbxmulti - gh11.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gh20"
+	filename	"cm00.noefbxmulti - gh20.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gh21"
+	filename	"cm00.noefbxmulti - gh21.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"jmp0"
+	filename	"cm00.noefbxmulti - jmp0.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"jmp1"
+	filename	"cm00.noefbxmulti - jmp1.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"wlk1"
+	filename	"cm00.noefbxmulti - wlk1.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gdm1"
+	filename	"cm00.noefbxmulti - gdm1.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"idl1"
+	filename	"cm00.noefbxmulti - idl1.fbx"
+	framerate	"7.000000"
+}
+
+SequenceEntry
+{
+	name		"mvb1"
+	filename	"cm00.noefbxmulti - mvb1.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mvl1"
+	filename	"cm00.noefbxmulti - mvl1.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mvr1"
+	filename	"cm00.noefbxmulti - mvr1.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"run1"
+	filename	"cm00.noefbxmulti - run1.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mw22"
+	filename	"cm00.noefbxmulti - mw22.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"cm12"
+	filename	"cm00.noefbxmulti - cm12.fbx"
+	framerate	"7.000000"
+}
+
+SequenceEntry
+{
+	name		"mb02"
+	filename	"cm00.noefbxmulti - mb02.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"mb12"
+	filename	"cm00.noefbxmulti - mb12.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"mb22"
+	filename	"cm00.noefbxmulti - mb22.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mi02"
+	filename	"cm00.noefbxmulti - mi02.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mi12"
+	filename	"cm00.noefbxmulti - mi12.fbx"
+	framerate	"9.000000"
+}
+
+SequenceEntry
+{
+	name		"mi22"
+	filename	"cm00.noefbxmulti - mi22.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mi32"
+	filename	"cm00.noefbxmulti - mi32.fbx"
+	framerate	"9.000000"
+}
+
+SequenceEntry
+{
+	name		"mw02"
+	filename	"cm00.noefbxmulti - mw02.fbx"
+	framerate	"9.000000"
+}
+
+SequenceEntry
+{
+	name		"mw12"
+	filename	"cm00.noefbxmulti - mw12.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"cm02"
+	filename	"cm00.noefbxmulti - cm02.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"wlk2"
+	filename	"cm00.noefbxmulti - wlk2.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"ded2"
+	filename	"cm00.noefbxmulti - ded2.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"idl2"
+	filename	"cm00.noefbxmulti - idl2.fbx"
+	framerate	"7.000000"
+}
+
+SequenceEntry
+{
+	name		"mvb2"
+	filename	"cm00.noefbxmulti - mvb2.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mvl2"
+	filename	"cm00.noefbxmulti - mvl2.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"mvr2"
+	filename	"cm00.noefbxmulti - mvr2.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"run2"
+	filename	"cm00.noefbxmulti - run2.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"rx02"
+	filename	"cm00.noefbxmulti - rx02.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"rx12"
+	filename	"cm00.noefbxmulti - rx12.fbx"
+	framerate	"7.000000"
+}
+
+SequenceEntry
+{
+	name		"rx22"
+	filename	"cm00.noefbxmulti - rx22.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"std2"
+	filename	"cm00.noefbxmulti - std2.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"cor2"
+	filename	"cm00.noefbxmulti - cor2.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"gu12"
+	filename	"cm00.noefbxmulti - gu12.fbx"
+	framerate	"10.000000"
+}
+
+SequenceEntry
+{
+	name		"gu02"
+	filename	"cm00.noefbxmulti - gu02.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gu22"
+	filename	"cm00.noefbxmulti - gu22.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"na02"
+	filename	"cm00.noefbxmulti - na02.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"na12"
+	filename	"cm00.noefbxmulti - na12.fbx"
+	framerate	"10.000000"
+}
+
+SequenceEntry
+{
+	name		"na22"
+	filename	"cm00.noefbxmulti - na22.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"yu02"
+	filename	"cm00.noefbxmulti - yu02.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"yu12"
+	filename	"cm00.noefbxmulti - yu12.fbx"
+	framerate	"10.000000"
+}
+
+SequenceEntry
+{
+	name		"yu22"
+	filename	"cm00.noefbxmulti - yu22.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"sh02"
+	filename	"cm00.noefbxmulti - sh02.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"sf12"
+	filename	"cm00.noefbxmulti - sf12.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"sf22"
+	filename	"cm00.noefbxmulti - sf22.fbx"
+	framerate	"11.000000"
+}
+
+SequenceEntry
+{
+	name		"sf02"
+	filename	"cm00.noefbxmulti - sf02.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"sh12"
+	filename	"cm00.noefbxmulti - sh12.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"sh22"
+	filename	"cm00.noefbxmulti - sh22.fbx"
+	framerate	"9.000000"
+}
+
+SequenceEntry
+{
+	name		"sk12"
+	filename	"cm00.noefbxmulti - sk12.fbx"
+	framerate	"10.000000"
+}
+
+SequenceEntry
+{
+	name		"sk22"
+	filename	"cm00.noefbxmulti - sk22.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"ri02"
+	filename	"cm00.noefbxmulti - ri02.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"na32"
+	filename	"cm00.noefbxmulti - na32.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"dbi6"
+	filename	"cm00.noefbxmulti - dbi6.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"dfi6"
+	filename	"cm00.noefbxmulti - dfi6.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"gdi6"
+	filename	"cm00.noefbxmulti - gdi6.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"bf02"
+	filename	"cm00.noefbxmulti - bf02.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"bf12"
+	filename	"cm00.noefbxmulti - bf12.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"bb12"
+	filename	"cm00.noefbxmulti - bb12.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"bb02"
+	filename	"cm00.noefbxmulti - bb02.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"mn22"
+	filename	"cm00.noefbxmulti - mn22.fbx"
+	framerate	"9.000000"
+}
+
+SequenceEntry
+{
+	name		"mn12"
+	filename	"cm00.noefbxmulti - mn12.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"mn02"
+	filename	"cm00.noefbxmulti - mn02.fbx"
+	framerate	"6.000000"
+}
+
+SequenceEntry
+{
+	name		"ms02"
+	filename	"cm00.noefbxmulti - ms02.fbx"
+	framerate	"6.000000"
+}
+
+SequenceEntry
+{
+	name		"ms12"
+	filename	"cm00.noefbxmulti - ms12.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"ms22"
+	filename	"cm00.noefbxmulti - ms22.fbx"
+	framerate	"6.000000"
+}
+
+SequenceEntry
+{
+	name		"si12"
+	filename	"cm00.noefbxmulti - si12.fbx"
+	framerate	"6.000000"
+}
+
+SequenceEntry
+{
+	name		"si02"
+	filename	"cm00.noefbxmulti - si02.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"si22"
+	filename	"cm00.noefbxmulti - si22.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"ma12"
+	filename	"cm00.noefbxmulti - ma12.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"ma02"
+	filename	"cm00.noefbxmulti - ma02.fbx"
+	framerate	"12.000000"
+}
+
+SequenceEntry
+{
+	name		"ma22"
+	filename	"cm00.noefbxmulti - ma22.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gc22"
+	filename	"cm00.noefbxmulti - gc22.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gh02"
+	filename	"cm00.noefbxmulti - gh02.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gh12"
+	filename	"cm00.noefbxmulti - gh12.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gh22"
+	filename	"cm00.noefbxmulti - gh22.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gc02"
+	filename	"cm00.noefbxmulti - gc02.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"gc12"
+	filename	"cm00.noefbxmulti - gc12.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"jmp2"
+	filename	"cm00.noefbxmulti - jmp2.fbx"
+	framerate	"15.000000"
+}
+

@@ -1,0 +1,86 @@
+NOESIS_MULTIFBX_FILE_VERSION 1
+
+SequenceEntry
+{
+	name		"al41"
+	filename	"al41.noefbxmulti - al41.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"al40"
+	filename	"al41.noefbxmulti - al40.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"al50"
+	filename	"al41.noefbxmulti - al50.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"al51"
+	filename	"al41.noefbxmulti - al51.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"alb1"
+	filename	"al41.noefbxmulti - alb1.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"alf1"
+	filename	"al41.noefbxmulti - alf1.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"all1"
+	filename	"al41.noefbxmulti - all1.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"alr1"
+	filename	"al41.noefbxmulti - alr1.fbx"
+	framerate	"30.000000"
+}
+
+SequenceEntry
+{
+	name		"i1c0"
+	filename	"al41.noefbxmulti - i1c0.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"i1c1"
+	filename	"al41.noefbxmulti - i1c1.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"o0c0"
+	filename	"al41.noefbxmulti - o0c0.fbx"
+	framerate	"15.000000"
+}
+
+SequenceEntry
+{
+	name		"o0c1"
+	filename	"al41.noefbxmulti - o0c1.fbx"
+	framerate	"15.000000"
+}
+

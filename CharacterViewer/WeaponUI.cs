@@ -295,13 +295,13 @@ public class WeaponUI(CharacterModel character)
             return;
         }
 
-        var mainBones = CharacterModel.GetMainAttachBones(weapon.Category);
+        var mainBones = _character.GetMainAttachBones(weapon.Category);
         if (mainBones != null && mainBones.Length > 0)
         {
             _rightBoneIndex = FindBoneIndex(mainBones[0]);
         }
 
-        var subBones = CharacterModel.GetSubAttachBones(weapon.Category, _character.DualWield);
+        var subBones = _character.GetSubAttachBones(weapon.Category, _character.DualWield);
         if (subBones != null && subBones.Length > 0)
         {
             _leftBoneIndex = FindBoneIndex(subBones[0]);
